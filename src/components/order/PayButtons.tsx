@@ -100,7 +100,6 @@ export function PayButtons({
     return (
       <div className="animate-fade-up space-y-5 text-center">
         <p className="text-sm text-soft">{t.checkout.scan}</p>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={pix.qr} alt="QR code Pix" width={240} height={240} className="mx-auto rounded-2xl bg-white p-3" />
         <p className="font-display text-3xl text-white">{formatMoney(pix.amount, "BRL")}</p>
         {pix.expiresAt && <Countdown until={pix.expiresAt} label={t.checkout.expiresIn} onExpire={() => setExpired(true)} />}

@@ -1,9 +1,10 @@
 import QRCode from "qrcode";
+import { site } from "@/config/site";
 
 /**
  * Pix estático "copia e cola" (BR Code, padrão EMV do Banco Central) com valor e identificador do pedido.
  * Funciona só com a chave Pix, sem provedor; a confirmação do pagamento é manual.
- * Variáveis: PIX_KEY, PIX_MERCHANT_NAME (titular da conta), PIX_MERCHANT_CITY.
+ * Chave em config/site.ts (pixKey) ou PIX_KEY. Variáveis: PIX_MERCHANT_NAME (titular da conta), PIX_MERCHANT_CITY.
  */
 
 const field = (id: string, value: string) => `${id}${String(value.length).padStart(2, "0")}${value}`;
@@ -21,10 +22,12 @@ function crc16(payload: string) {
   return crc.toString(16).toUpperCase().padStart(4, "0");
 }
 
-export const staticPixConfigured = () => Boolean(process.env.PIX_KEY);
+const pixKey = () => (process.env.PIX_KEY || site.pixKey).trim();
+
+export const staticPixConfigured = () => Boolean(pixKey());
 
 export function pixPayload({ amountCents, txid }: { amountCents: number; txid: string }) {
-  const key = process.env.PIX_KEY!.trim();
+  const key = pixKey();
   const body =
     field("00", "01") +
     field("26", field("00", "br.gov.bcb.pix") + field("01", key)) +

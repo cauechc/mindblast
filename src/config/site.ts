@@ -18,6 +18,8 @@ export const site = {
   state: "SP",
   /** CNPJ ou CPF exibido no rodapé. */
   taxId: "[PLACEHOLDER]",
+  /** Chave Pix usada no Pix estático (copia e cola). Pode ser trocada pela variável PIX_KEY. */
+  pixKey: "mindblastsites@gmail.com",
   /** Prazo prometido para a prévia grátis, em horas. */
   previewHours: 48,
 } as const;

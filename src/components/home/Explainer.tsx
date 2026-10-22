@@ -32,7 +32,7 @@ export function Explainer({ locale, t }: { locale: Locale; t: Dictionary }) {
           </ol>
         </div>
         <Reveal className="mx-auto w-56 sm:w-64">
-          <Phone site={{ ...sample[locale], accent: sample.accent, city: sample.city }} className="shadow-glow" />
+          <Phone site={{ ...sample[locale], accent: sample.accent, city: sample.city, image: sample.image }} className="shadow-glow" />
         </Reveal>
       </Container>
     </section>

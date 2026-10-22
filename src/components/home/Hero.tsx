@@ -45,7 +45,7 @@ export function Hero({ locale, t }: { locale: Locale; t: Dictionary }) {
             className="aspect-[4/5] w-[78%] rounded-3xl shadow-card sm:aspect-[5/6]"
           />
           <div className="absolute -bottom-6 right-0 w-[78%] drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)]">
-            <DevicePair site={{ ...sample[locale], accent: sample.accent, city: sample.city }} />
+            <DevicePair site={{ ...sample[locale], accent: sample.accent, city: sample.city, image: sample.image }} />
           </div>
         </div>
       </Container>

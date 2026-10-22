@@ -20,7 +20,7 @@ export function ProjectCard({ project, locale, t }: { project: (typeof projects)
           </span>
         )}
         <DevicePair
-          site={{ ...copy, accent: project.accent, city: project.city }}
+          site={{ ...copy, accent: project.accent, city: project.city, image: project.image }}
           className="transition duration-500 group-hover:scale-[1.03]"
         />
       </div>

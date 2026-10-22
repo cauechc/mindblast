@@ -7,9 +7,9 @@ type Photo = { src?: string; credit?: string };
 
 export const images: Record<"hero" | "landing" | "institucional" | "app" | "contact", Photo> = {
   hero: {},
-  landing: {},
-  institucional: {},
-  app: {},
+  landing: { src: "/fotos/servico-landing.jpg" },
+  institucional: { src: "/fotos/servico-institucional.jpg" },
+  app: { src: "/fotos/servico-app.jpg" },
   contact: {},
 };
 

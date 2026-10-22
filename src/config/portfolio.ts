@@ -1,8 +1,7 @@
 /**
  * PROJETOS EXEMPLO. Substitua por projetos reais e autorizados de clientes.
  * Enquanto `example: true`, o card mostra o selo "Projeto exemplo".
- * `image`: caminho em /public para um print real do site (ex.: "/portfolio/lava-jato.jpg").
- * Sem imagem, o card mostra uma maquete do site gerada em código.
+ * `image`: foto em /public usada dentro da maquete do site (ex.: "/fotos/lava-jato.jpg").
  */
 export type Project = {
   slug: string;
@@ -19,6 +18,7 @@ export const projects: Project[] = [
   {
     slug: "lava-jato",
     example: true,
+    image: "/fotos/lava-jato.jpg",
     city: "Salto/SP",
     accent: "#2F8CFF",
     pt: {
@@ -35,6 +35,7 @@ export const projects: Project[] = [
   {
     slug: "corretor-de-imoveis",
     example: true,
+    image: "/fotos/corretor-de-imoveis.jpg",
     city: "Itu/SP",
     accent: "#C9A86A",
     pt: {
@@ -51,6 +52,7 @@ export const projects: Project[] = [
   {
     slug: "pet-shop",
     example: true,
+    image: "/fotos/pet-shop.jpg",
     city: "Indaiatuba/SP",
     accent: "#3CC6A8",
     pt: {
@@ -67,6 +69,7 @@ export const projects: Project[] = [
   {
     slug: "pilates",
     example: true,
+    image: "/fotos/pilates.jpg",
     city: "Sorocaba/SP",
     accent: "#E58FB0",
     pt: {
@@ -83,6 +86,7 @@ export const projects: Project[] = [
   {
     slug: "marmitaria",
     example: true,
+    image: "/fotos/marmitaria.jpg",
     city: "Campinas/SP",
     accent: "#F2A33A",
     pt: {
@@ -99,6 +103,7 @@ export const projects: Project[] = [
   {
     slug: "serralheria",
     example: true,
+    image: "/fotos/serralheria.jpg",
     city: "Jundiaí/SP",
     accent: "#8FA3BF",
     pt: {
@@ -115,6 +120,7 @@ export const projects: Project[] = [
   {
     slug: "oficina-de-motos",
     example: true,
+    image: "/fotos/oficina-de-motos.jpg",
     city: "Salto/SP",
     accent: "#FF5A3C",
     pt: {
@@ -131,6 +137,7 @@ export const projects: Project[] = [
   {
     slug: "eletrica",
     example: true,
+    image: "/fotos/eletrica.jpg",
     city: "Itu/SP",
     accent: "#F5D020",
     pt: {

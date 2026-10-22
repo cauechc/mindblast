@@ -1,7 +1,7 @@
 import { MapPin, Star } from "lucide-react";
 import { WhatsAppIcon } from "./icons";
 
-export type MockSite = { accent: string; type: string; headline: string; city: string };
+export type MockSite = { accent: string; type: string; headline: string; city: string; image?: string };
 
 /** Uma maquete de site feita em código (texto real, nada de texto falso borrado). */
 function MiniSite({ site, mobile = false }: { site: MockSite; mobile?: boolean }) {
@@ -22,7 +22,11 @@ function MiniSite({ site, mobile = false }: { site: MockSite; mobile?: boolean }
       </div>
       <div
         className="relative flex flex-1 flex-col justify-end px-[6%] pb-[6%]"
-        style={{ background: `linear-gradient(160deg, ${accent}33 0%, transparent 55%), linear-gradient(0deg, #0b0f1c 0%, transparent 70%), #141a2e` }}
+        style={{
+          background: site.image
+            ? `linear-gradient(0deg, #0b0f1c 0%, rgb(11 15 28 / 0.35) 60%, rgb(11 15 28 / 0.1) 100%), center / cover no-repeat url(${site.image})`
+            : `linear-gradient(160deg, ${accent}33 0%, transparent 55%), linear-gradient(0deg, #0b0f1c 0%, transparent 70%), #141a2e`,
+        }}
       >
         <p className="text-[0.45em] text-white/60 flex items-center gap-1">
           <MapPin className="h-[1.1em] w-[1.1em]" aria-hidden />
@@ -37,7 +41,14 @@ function MiniSite({ site, mobile = false }: { site: MockSite; mobile?: boolean }
       <div className={`grid gap-[3%] px-[6%] py-[4%] ${mobile ? "grid-cols-2" : "grid-cols-3"}`}>
         {[0, 1, 2].slice(0, mobile ? 2 : 3).map((i) => (
           <div key={i} className="rounded-[0.3em] bg-white/5 p-[6%]">
-            <div className="aspect-[4/3] rounded-[0.25em]" style={{ background: `linear-gradient(135deg, ${accent}55, ${accent}11)` }} />
+            <div
+              className="aspect-[4/3] rounded-[0.25em]"
+              style={{
+                background: site.image
+                  ? `${["20% 30%", "50% 60%", "80% 40%"][i]} / 260% no-repeat url(${site.image})`
+                  : `linear-gradient(135deg, ${accent}55, ${accent}11)`,
+              }}
+            />
             <div className="mt-[0.4em] flex gap-[0.1em]" style={{ color: accent }}>
               {[0, 1, 2, 3, 4].map((s) => (
                 <Star key={s} className="h-[0.45em] w-[0.45em] fill-current" aria-hidden />

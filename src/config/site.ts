@@ -13,7 +13,7 @@ export const site = {
     shortLink: "w.app/mindblast",
   },
   instagram: "mindblastsites",
-  email: "[EMAIL]",
+  email: "mindblastsites@gmail.com",
   city: "Salto",
   state: "SP",
   /** CNPJ ou CPF exibido no rodapé. */

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Check, MapPin, X } from "lucide-react";
 import { DevicePair } from "@/components/DeviceMockup";
+import { PhotoSlot } from "@/components/PhotoSlot";
 import { ProjectCard } from "@/components/home/Portfolio";
 import { Container, LinkButton, WhatsAppButton } from "@/components/ui";
 import { projects } from "@/config/portfolio";
@@ -68,9 +69,13 @@ export default async function ProjectPage({ params }: { params: Promise<{ locale
             </div>
           </div>
           <div className="rounded-[2rem] p-8 sm:p-12" style={{ background: `radial-gradient(80% 70% at 50% 20%, ${project.accent}33, transparent 70%)` }}>
-            <DevicePair site={{ ...copy, accent: project.accent, city: project.city }} />
+            <DevicePair site={{ ...copy, accent: project.accent, city: project.city, image: project.image }} />
           </div>
         </div>
+
+        {project.image && (
+          <PhotoSlot src={project.image} alt={copy.type} label={t.common.photoSlot} className="mt-16 aspect-[16/9] rounded-3xl" />
+        )}
 
         <h2 className="mt-24 font-display text-2xl text-white">{t.portfolio.others}</h2>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

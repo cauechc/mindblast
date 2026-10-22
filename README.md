@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mind Blast — site do estúdio
 
-## Getting Started
-
-First, run the development server:
+Next.js (App Router) + TypeScript + Tailwind. pt-BR em `/pt` (BRL, Pix) e inglês em `/en` (USD, Stripe).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # preencha as chaves quando tiver
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Onde editar
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| O quê | Arquivo |
+| --- | --- |
+| Preços, planos, adicionais, desconto à vista, entrada | `src/config/pricing.ts` |
+| WhatsApp, Instagram, e-mail, CNPJ/CPF, prazo da prévia | `src/config/site.ts` |
+| Fotos (deixe em `public/fotos/`) | `src/config/images.ts` |
+| Projetos do portfólio (hoje são exemplos marcados) | `src/config/portfolio.ts` |
+| Depoimentos reais | `src/config/testimonials.ts` |
+| Textos do site | `src/i18n/pt.ts`, `src/i18n/en.ts` |
+| Política de privacidade e termos (modelos) | `src/config/legal.ts` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Preço `null` = "Sob consulta": vira pedido de orçamento e não vai para o checkout.
 
-## Learn More
+## Segurança de preço
 
-To learn more about Next.js, take a look at the following resources:
+`POST /api/orders` ignora qualquer valor vindo do navegador e recalcula o pedido com `src/lib/pricing.ts`
+a partir de `config/pricing.ts`. A moeda segue o idioma (PT → BRL, EN → USD).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Estado atual
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Pronto: home, serviços, explicação de landing page, portfólio + página de projeto, como funciona, preços,
+depoimentos (espaços vazios), contato, "Monte seu pedido", prévia grátis, checkout, LGPD (cookies + páginas),
+SEO (metadata, sitemap, robots, JSON-LD LocalBusiness).
 
-## Deploy on Vercel
+Provisório: pedidos e leads ficam em `.data/db.json` (trocar por PostgreSQL); e-mails só aparecem no log
+sem `RESEND_API_KEY`; Pix aguarda a escolha do provedor; Stripe cria a sessão mas ainda falta webhook e página de sucesso.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Próximas etapas: webhooks Stripe/Pix com verificação de assinatura, página de sucesso + envio de materiais,
+banco de dados, login (link mágico) e área do cliente, painel admin com orçamentos personalizados.

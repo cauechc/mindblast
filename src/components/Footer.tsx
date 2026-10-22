@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Mail, MapPin } from "lucide-react";
-import { site, whatsappUrl } from "@/config/site";
+import { site } from "@/config/site";
 import type { Dictionary, Locale } from "@/i18n";
 import { InstagramIcon, WhatsAppIcon } from "./icons";
 import { Logo } from "./Logo";
@@ -17,7 +17,7 @@ export function Footer({ locale, t }: { locale: Locale; t: Dictionary }) {
           <Logo className="text-xl" />
           <p className="mt-5 max-w-sm text-sm text-soft">{t.contact.location}</p>
           <div className="mt-5 flex flex-col gap-2 text-sm text-soft">
-            <a href={whatsappUrl(t.wa.generic)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-white">
+            <a href={`tel:+${site.whatsapp.number}`} className="inline-flex items-center gap-2 hover:text-white">
               <WhatsAppIcon className="h-4 w-4" /> {site.whatsapp.display}
             </a>
             <a href={`https://instagram.com/${site.instagram}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-white">

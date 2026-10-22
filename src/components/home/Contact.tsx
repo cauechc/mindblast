@@ -16,8 +16,12 @@ export function Contact({ locale, t }: { locale: Locale; t: Dictionary }) {
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-blast-400">{t.contact.eyebrow}</p>
             <h2 className="mt-3 font-display text-3xl leading-[1.05] text-white sm:text-5xl">{t.contact.title}</h2>
             <p className="mt-4 text-lg text-soft">{t.contact.subtitle}</p>
-            <WhatsAppButton href={whatsappUrl(t.wa.generic)} className="mt-8 !px-7 !py-4 text-base">
+            <p className="mt-8 text-sm text-soft">WhatsApp</p>
+            <a href={`tel:+${site.whatsapp.number}`} className="mt-1 block font-display text-3xl text-white sm:text-4xl">
               {site.whatsapp.display}
+            </a>
+            <WhatsAppButton href={whatsappUrl(t.wa.generic)} className="mt-5 !px-7 !py-4 text-base">
+              {t.common.whatsapp}
             </WhatsAppButton>
             <ul className="mt-10 space-y-3 text-soft">
               <li>

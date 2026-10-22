@@ -20,6 +20,8 @@ export const site = {
   taxId: "[PLACEHOLDER]",
   /** Chave Pix usada no Pix estático (copia e cola). Pode ser trocada pela variável PIX_KEY. */
   pixKey: "mindblastsites@gmail.com",
+  /** Titular da chave, como no banco. O QR code aceita até 25 caracteres (o resto é cortado). */
+  pixHolder: "Caue Cesar Horschutz Camargo",
   /** Prazo prometido para a prévia grátis, em horas. */
   previewHours: 48,
 } as const;

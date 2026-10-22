@@ -35,7 +35,7 @@ export function pixPayload({ amountCents, txid }: { amountCents: number; txid: s
     field("53", "986") +
     field("54", (amountCents / 100).toFixed(2)) +
     field("58", "BR") +
-    field("59", clean(process.env.PIX_MERCHANT_NAME ?? "MIND BLAST", 25)) +
+    field("59", clean(process.env.PIX_MERCHANT_NAME || site.pixHolder, 25)) +
     field("60", clean(process.env.PIX_MERCHANT_CITY ?? "SALTO", 15)) +
     field("62", field("05", txid.replace(/[^A-Za-z0-9]/g, "").slice(0, 25))) +
     "6304";

@@ -1,3 +1,6 @@
+import { AirVent, Sofa, Sun } from "lucide-react";
+import type { ServiceId } from "@/config/site";
+
 type P = { className?: string };
 
 export function WhatsAppIcon({ className = "h-5 w-5" }: P) {
@@ -8,34 +11,31 @@ export function WhatsAppIcon({ className = "h-5 w-5" }: P) {
   );
 }
 
-export function InstagramIcon({ className = "h-5 w-5" }: P) {
+export const serviceIcons: Record<ServiceId, typeof Sun> = {
+  "energia-solar": Sun,
+  "moveis-planejados": Sofa,
+  "ar-condicionado": AirVent,
+};
+
+/** Marca: casa com uma folha, em azul e verde. */
+export function LogoMark({ className = "h-9 w-9" }: P) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden className={className}>
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" />
+    <svg viewBox="0 0 40 40" aria-hidden className={className}>
+      <rect width="40" height="40" rx="10" fill="#0A1B3D" />
+      <path d="M9 19.5 20 10l11 9.5V30a1.5 1.5 0 0 1-1.5 1.5h-19A1.5 1.5 0 0 1 9 30z" fill="none" stroke="white" strokeWidth="2.4" strokeLinejoin="round" />
+      <path d="M15 27c0-5 3.5-8.5 10-9-.3 6.2-3.8 9.6-10 9Z" fill="#22C55E" />
+      <path d="M15 27c2.2-2.6 4.5-4.4 7-5.6" stroke="#0A1B3D" strokeWidth="1.2" strokeLinecap="round" fill="none" />
     </svg>
   );
 }
 
-/** Arco elétrico fino, usado com moderação como detalhe da marca. */
-export function Arc({ className = "" }: P) {
+export function Logo({ light = false, className = "" }: P & { light?: boolean }) {
   return (
-    <svg viewBox="0 0 120 24" fill="none" aria-hidden className={className}>
-      <path
-        d="M0 12 L22 12 L30 4 L40 20 L50 6 L58 16 L66 12 L120 12"
-        stroke="url(#arc)"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-        strokeLinecap="round"
-      />
-      <defs>
-        <linearGradient id="arc" x1="0" x2="120" y1="0" y2="0" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#2F8CFF" stopOpacity="0" />
-          <stop offset="0.45" stopColor="#5AA4FF" />
-          <stop offset="1" stopColor="#2F8CFF" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-    </svg>
+    <span className={`inline-flex items-center gap-2.5 ${className}`}>
+      <LogoMark />
+      <span className={`text-lg font-extrabold leading-none tracking-tight ${light ? "text-white" : "text-navy-900"}`}>
+        Casa Nova <span className="text-leaf">Interior</span>
+      </span>
+    </span>
   );
 }

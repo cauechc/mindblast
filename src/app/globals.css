@@ -1,83 +1,55 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy-950: #070B1F;
-  --color-navy-900: #0B1230;
-  --color-navy-800: #0E1638;
-  --color-navy-700: #172152;
-  --color-navy-600: #22306b;
-  --color-blast: #2F8CFF;
-  --color-blast-400: #5AA4FF;
-  --color-blast-600: #1A6FE0;
-  --color-ice: #E8F4FF;
-  --color-soft: #AFC6FF;
+  --color-navy-950: #061229;
+  --color-navy-900: #0A1B3D;
+  --color-navy-800: #0F2550;
+  --color-navy-700: #173266;
+  --color-navy-100: #E6ECF7;
+  --color-navy-50: #F4F7FC;
+  --color-leaf: #16A34A;
+  --color-leaf-400: #22C55E;
+  --color-leaf-600: #15803D;
+  --color-leaf-50: #ECFDF3;
+  --color-ink: #0F1B33;
+  --color-muted: #55617A;
   --color-wa: #25D366;
-  --color-wa-600: #1DA851;
 
-  --font-display: var(--font-archivo-black), "Arial Black", system-ui, sans-serif;
-  --font-sans: var(--font-space-grotesk), system-ui, sans-serif;
+  --font-sans: var(--font-jakarta), system-ui, sans-serif;
 
-  --shadow-glow: 0 0 0 1px rgb(47 140 255 / 0.25), 0 10px 40px -10px rgb(47 140 255 / 0.45);
-  --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 20px 50px -20px rgb(0 0 0 / 0.6);
-
-  --animate-fade-up: fade-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-  --animate-spark: spark 2.4s ease-in-out infinite;
-
-  @keyframes fade-up {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: none; }
-  }
-  @keyframes spark {
-    0%, 100% { opacity: 0.35; }
-    50% { opacity: 1; }
-  }
+  --shadow-card: 0 1px 2px rgb(15 27 51 / 0.06), 0 12px 32px -12px rgb(15 27 51 / 0.18);
+  --shadow-cta: 0 10px 30px -10px rgb(22 163 74 / 0.6);
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5.5rem;
+  scroll-padding-top: 5rem;
 }
 
 body {
-  background: var(--color-navy-950);
-  color: var(--color-ice);
+  background: white;
+  color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: var(--color-blast);
+  background: var(--color-leaf);
   color: white;
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-blast-400);
+  outline: 2px solid var(--color-leaf-400);
   outline-offset: 3px;
   border-radius: 6px;
 }
 
-/* Revela ao rolar (ver components/Reveal.tsx). */
-.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
-.reveal.is-visible { opacity: 1; transform: none; }
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
-  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
 }
 
-/* Grade sutil de fundo. */
-.bg-grid {
-  background-image:
-    linear-gradient(rgb(175 198 255 / 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(175 198 255 / 0.05) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+/* Textura sutil do hero. */
+.bg-dots {
+  background-image: radial-gradient(rgb(255 255 255 / 0.08) 1px, transparent 1px);
+  background-size: 22px 22px;
 }
-
-.skeleton {
-  background: linear-gradient(90deg, rgb(255 255 255 / 0.04), rgb(255 255 255 / 0.09), rgb(255 255 255 / 0.04));
-  background-size: 200% 100%;
-  animation: shimmer 1.4s linear infinite;
-}
-@keyframes shimmer { to { background-position: -200% 0; } }

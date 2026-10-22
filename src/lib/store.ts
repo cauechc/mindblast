@@ -2,94 +2,70 @@ import { randomBytes } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import postgres, { type Sql } from "postgres";
-import type { OrderQuote, OrderSelection } from "./pricing";
+import type { City, ServiceId } from "@/config/site";
 
 /**
- * Armazenamento de pedidos e leads.
+ * Armazenamento dos leads (pedidos de orçamento).
  */
 
-export type Customer = {
-  name: string;
-  company: string;
-  whatsapp: string;
-  email: string;
-  industry: string;
-  city: string;
-  instagram?: string;
-  hasLogo: boolean;
-  hasDomain: boolean;
-  notes?: string;
-  needs?: string;
-};
-
-export type OrderStatus = "received" | "in_progress" | "preview_sent" | "adjustments" | "published";
-export type PaymentStatus = "quote_requested" | "awaiting_payment" | "deposit_paid" | "paid";
-
-export type Order = {
-  id: string;
-  createdAt: string;
-  locale: "pt" | "en";
-  selection: OrderSelection;
-  /** Valores calculados no servidor. É isto que será cobrado. */
-  quote: OrderQuote;
-  customer: Customer;
-  status: OrderStatus;
-  paymentStatus: PaymentStatus;
-  /** Pagamentos confirmados pelo provedor (webhook) ou pelo dono no painel. */
-  payments?: { provider: "mercadopago" | "stripe" | "manual"; id: string; amount: number; at: string }[];
-  /** Orçamento definido pelo dono para pedidos "Sob consulta". */
-  customQuote?: { amount: number; description: string; at: string };
-  previewUrl?: string;
-  /** Anotações internas do dono. */
-  adminNotes?: string;
-};
+export const leadStatuses = ["novo", "em_contato", "encaminhado", "fechado", "perdido"] as const;
+export type LeadStatus = (typeof leadStatuses)[number];
 
 export type Lead = {
   id: string;
   createdAt: string;
-  locale: "pt" | "en";
   name: string;
+  /** Só dígitos, com DDI 55. */
   whatsapp: string;
-  industry: string;
-  city: string;
-  link: string;
+  city: City;
+  service: ServiceId;
+  description: string;
+  /** Momento em que a pessoa aceitou a Política de Privacidade (LGPD). */
+  consentAt: string;
+  /** Origem da visita (utm_source, utm_campaign…), para medir campanhas. */
+  source?: Record<string, string>;
+  status: LeadStatus;
+  /** Anotações internas. */
+  notes?: string;
+  /** Resultado do envio para o CRM (webhook). */
+  crm?: { ok: boolean; at: string; error?: string };
 };
 
-type DB = { orders: Order[]; leads: Lead[] };
+type DB = { leads: Lead[] };
 
 /*
- * Com DATABASE_URL (PostgreSQL: Supabase, Neon…): tabelas orders e leads, cada linha guarda o registro em jsonb.
- * Sem DATABASE_URL: memória + arquivo .data/db.json, só para desenvolvimento.
+ * Com DATABASE_URL (PostgreSQL: Supabase, Neon…): tabela casanova_leads, cada linha guarda o lead em jsonb.
+ * Sem DATABASE_URL: memória + arquivo .data/leads.json, só para desenvolvimento.
  */
 
-const g = globalThis as unknown as { __mbdb?: DB; __mbsql?: Sql; __mbschema?: Promise<unknown> };
+const g = globalThis as unknown as { __cndb?: DB; __cnsql?: Sql; __cnschema?: Promise<unknown> };
 
 function sql() {
   if (!process.env.DATABASE_URL) return null;
-  g.__mbsql ??= postgres(process.env.DATABASE_URL, { max: 5, idle_timeout: 20, prepare: false });
-  g.__mbschema ??= g.__mbsql`
-    create table if not exists orders (id text primary key, created_at timestamptz not null default now(), data jsonb not null);
-    create table if not exists leads (id text primary key, created_at timestamptz not null default now(), data jsonb not null);
+  g.__cnsql ??= postgres(process.env.DATABASE_URL, { max: 5, idle_timeout: 20, prepare: false });
+  g.__cnschema ??= g.__cnsql`
+    create table if not exists casanova_leads (id text primary key, created_at timestamptz not null default now(), data jsonb not null);
+    create index if not exists casanova_leads_created_at on casanova_leads (created_at desc);
   `.simple();
-  return g.__mbsql;
+  return g.__cnsql;
 }
 
 async function db() {
   const q = sql();
-  if (q) await g.__mbschema;
+  if (q) await g.__cnschema;
   return q;
 }
 
-const file = path.join(process.cwd(), ".data", "db.json");
+const file = path.join(process.cwd(), ".data", "leads.json");
 
 async function load(): Promise<DB> {
-  if (g.__mbdb) return g.__mbdb;
+  if (g.__cndb) return g.__cndb;
   try {
-    g.__mbdb = JSON.parse(await readFile(file, "utf8")) as DB;
+    g.__cndb = JSON.parse(await readFile(file, "utf8")) as DB;
   } catch {
-    g.__mbdb = { orders: [], leads: [] };
+    g.__cndb = { leads: [] };
   }
-  return g.__mbdb;
+  return g.__cndb;
 }
 
 async function save(data: DB) {
@@ -101,59 +77,17 @@ async function save(data: DB) {
   }
 }
 
-/** Número de pedido curto e legível, ex.: MB-7K2Q9X. */
-export function newId(prefix: string) {
+/** Código curto e legível, ex.: CN-7K2Q9X. */
+export function newId(prefix = "CN") {
   const alphabet = "23456789ABCDEFGHJKMNPQRSTUVWXYZ";
   const bytes = randomBytes(6);
   return `${prefix}-${Array.from(bytes, (b) => alphabet[b % alphabet.length]).join("")}`;
 }
 
-export async function createOrder(order: Order) {
-  const q = await db();
-  if (q) {
-    await q`insert into orders (id, created_at, data) values (${order.id}, ${order.createdAt}, ${q.json(order)})`;
-    return order;
-  }
-  const data = await load();
-  data.orders.push(order);
-  await save(data);
-  return order;
-}
-
-export async function getOrder(id: string) {
-  const q = await db();
-  if (q) {
-    const [row] = await q<{ data: Order }[]>`select data from orders where id = ${id}`;
-    return row?.data ?? null;
-  }
-  const data = await load();
-  return data.orders.find((o) => o.id === id) ?? null;
-}
-
-/**
- * Atualiza um pedido. Com `onlyIf`, só altera se o status de pagamento ainda for esse
- * (evita registrar duas vezes o mesmo pagamento quando dois webhooks chegam juntos).
- */
-export async function updateOrder(id: string, patch: Partial<Order>, onlyIf?: PaymentStatus) {
-  const q = await db();
-  if (q) {
-    const rows = onlyIf
-      ? await q<{ data: Order }[]>`update orders set data = data || ${q.json(patch)} where id = ${id} and data->>'paymentStatus' = ${onlyIf} returning data`
-      : await q<{ data: Order }[]>`update orders set data = data || ${q.json(patch)} where id = ${id} returning data`;
-    return rows[0]?.data ?? null;
-  }
-  const data = await load();
-  const order = data.orders.find((o) => o.id === id);
-  if (!order || (onlyIf && order.paymentStatus !== onlyIf)) return null;
-  Object.assign(order, patch);
-  await save(data);
-  return order;
-}
-
 export async function createLead(lead: Lead) {
   const q = await db();
   if (q) {
-    await q`insert into leads (id, created_at, data) values (${lead.id}, ${lead.createdAt}, ${q.json(lead)})`;
+    await q`insert into casanova_leads (id, created_at, data) values (${lead.id}, ${lead.createdAt}, ${q.json(lead)})`;
     return lead;
   }
   const data = await load();
@@ -162,20 +96,24 @@ export async function createLead(lead: Lead) {
   return lead;
 }
 
-export async function listOrders(limit = 200) {
+export async function updateLead(id: string, patch: Partial<Lead>) {
   const q = await db();
   if (q) {
-    const rows = await q<{ data: Order }[]>`select data from orders order by created_at desc limit ${limit}`;
-    return rows.map((r) => r.data);
+    const rows = await q<{ data: Lead }[]>`update casanova_leads set data = data || ${q.json(patch)} where id = ${id} returning data`;
+    return rows[0]?.data ?? null;
   }
   const data = await load();
-  return [...data.orders].reverse().slice(0, limit);
+  const lead = data.leads.find((l) => l.id === id);
+  if (!lead) return null;
+  Object.assign(lead, patch);
+  await save(data);
+  return lead;
 }
 
-export async function listLeads(limit = 200) {
+export async function listLeads(limit = 500) {
   const q = await db();
   if (q) {
-    const rows = await q<{ data: Lead }[]>`select data from leads order by created_at desc limit ${limit}`;
+    const rows = await q<{ data: Lead }[]>`select data from casanova_leads order by created_at desc limit ${limit}`;
     return rows.map((r) => r.data);
   }
   const data = await load();

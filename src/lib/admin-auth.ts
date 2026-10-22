@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
  * Login do painel com uma senha só (ADMIN_PASSWORD). A sessão é um cookie assinado com
  * ADMIN_SESSION_SECRET (ou a própria senha), válido por 7 dias.
  */
-export const ADMIN_COOKIE = "mb_admin";
+export const ADMIN_COOKIE = "cn_admin";
 const MAX_AGE = 7 * 24 * 3600;
 
 const secret = () => process.env.ADMIN_SESSION_SECRET || process.env.ADMIN_PASSWORD || "";

@@ -1,69 +1,77 @@
-import { ArrowRight, Check } from "lucide-react";
-import { images, photoBriefs } from "@/config/images";
-import { projects } from "@/config/portfolio";
-import type { Dictionary, Locale } from "@/i18n";
-import { DevicePair } from "../DeviceMockup";
-import { Arc } from "../icons";
-import { PhotoSlot } from "../PhotoSlot";
+import Link from "next/link";
+import { ArrowRight, CircleCheck, MapPin } from "lucide-react";
+import { cities, services, site, whatsappUrl } from "@/config/site";
+import { serviceIcons, WhatsAppIcon } from "../icons";
 import { Container, LinkButton } from "../ui";
 
-export function Hero({ locale, t }: { locale: Locale; t: Dictionary }) {
-  const sample = projects[0];
+const perks = ["100% gratuito", "Sem compromisso", "Profissionais da região"];
+
+export function Hero() {
   return (
-    <section className="relative overflow-hidden pt-28 sm:pt-36">
-      <div className="bg-grid pointer-events-none absolute inset-0" />
-      <div className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[900px] -translate-x-1/2 rounded-full bg-blast/15 blur-[120px]" />
-      <Container className="relative grid items-center gap-14 pb-16 lg:grid-cols-[1.05fr_1fr] lg:pb-24">
-        <div className="animate-fade-up">
-          <p className="inline-flex items-center gap-2 rounded-full border border-blast/30 bg-blast/10 px-3 py-1 text-xs font-medium text-soft">
-            <span className="h-1.5 w-1.5 rounded-full bg-blast animate-spark" />
-            {t.hero.eyebrow}
+    <section className="relative overflow-hidden bg-navy-900 text-white">
+      <div className="bg-dots absolute inset-0" aria-hidden />
+      <div className="absolute -right-40 -top-40 h-[30rem] w-[30rem] rounded-full bg-leaf/20 blur-3xl" aria-hidden />
+      <Container className="relative grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[1.15fr_1fr] lg:py-24">
+        <div>
+          <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-sm font-semibold text-navy-100">
+            <MapPin className="h-4 w-4 text-leaf-400" aria-hidden />
+            {cities.join(" · ")}
           </p>
-          <h1 className="mt-6 font-display text-[2.6rem] leading-[0.98] tracking-tight text-white sm:text-6xl xl:text-7xl">
-            {t.hero.title}
+          <h1 className="mt-6 text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]">
+            Receba orçamentos <span className="text-leaf-400">gratuitos</span> para sua casa em poucos minutos
           </h1>
-          <Arc className="mt-5 h-5 w-40" />
-          <p className="mt-5 max-w-xl text-lg text-soft sm:text-xl">{t.hero.subtitle}</p>
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <LinkButton href={`/${locale}#servicos`} className="!px-7 !py-3.5 text-base">
-              {t.hero.primary}
-              <ArrowRight className="h-4 w-4" />
+          <p className="mt-5 max-w-xl text-lg leading-relaxed text-navy-100 sm:text-xl">
+            Conectamos moradores de Salto, Itu, Indaiatuba e Cabreúva aos melhores serviços para sua casa.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <LinkButton href="#orcamento" className="text-lg sm:!px-8 sm:!py-4">
+              Solicitar Orçamento <ArrowRight className="h-5 w-5" aria-hidden />
             </LinkButton>
-            <LinkButton href={`/${locale}/previa`} variant="secondary" className="!px-7 !py-3.5 text-base">
-              {t.hero.secondary}
-            </LinkButton>
+            <a
+              href={whatsappUrl("Olá! Quero um orçamento para minha casa.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-2 py-3 font-semibold text-navy-100 hover:text-white"
+            >
+              <WhatsAppIcon className="h-5 w-5 text-wa" />
+              <span>ou chame no WhatsApp <span className="whitespace-nowrap">{site.whatsapp.display}</span></span>
+            </a>
           </div>
-        </div>
-
-        <div className="relative animate-fade-up [animation-delay:150ms]">
-          <PhotoSlot
-            src={images.hero.src}
-            credit={images.hero.credit}
-            alt={photoBriefs[locale].hero}
-            label={t.common.photoSlot}
-            priority
-            className="aspect-[4/5] w-[78%] rounded-3xl shadow-card sm:aspect-[5/6]"
-          />
-          <div className="absolute -bottom-6 right-0 w-[78%] drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)]">
-            <DevicePair site={{ ...sample[locale], accent: sample.accent, city: sample.city, image: sample.image }} />
-          </div>
-        </div>
-      </Container>
-
-      <div className="relative border-y border-white/5 bg-navy-900/60">
-        <Container>
-          <ul className="grid grid-cols-2 gap-x-6 gap-y-3 py-5 text-sm font-medium text-ice md:flex md:justify-between">
-            {t.trust.map((item) => (
-              <li key={item} className="flex items-center gap-2">
-                <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-blast/15 text-blast-400">
-                  <Check className="h-3 w-3" strokeWidth={3} />
-                </span>
-                {item}
+          <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold text-navy-100">
+            {perks.map((p) => (
+              <li key={p} className="flex items-center gap-2">
+                <CircleCheck className="h-5 w-5 text-leaf-400" aria-hidden />
+                {p}
               </li>
             ))}
           </ul>
-        </Container>
-      </div>
+        </div>
+
+        <div className="rounded-3xl bg-white p-6 text-ink shadow-2xl sm:p-8">
+          <p className="text-sm font-bold uppercase tracking-wider text-leaf">Comece aqui</p>
+          <h2 className="mt-1 text-2xl font-extrabold text-navy-900">Qual serviço você precisa?</h2>
+          <div className="mt-6 grid gap-3">
+            {services.map((s) => {
+              const Icon = serviceIcons[s.id];
+              return (
+                <Link
+                  key={s.id}
+                  href={`/?servico=${s.id}#orcamento`}
+                  scroll={false}
+                  className="group flex items-center gap-4 rounded-2xl border-2 border-navy-100 p-4 transition hover:border-leaf hover:bg-leaf-50"
+                >
+                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-navy-900 text-leaf-400">
+                    <Icon className="h-6 w-6" aria-hidden />
+                  </span>
+                  <span className="flex-1 text-lg font-bold text-navy-900">{s.name}</span>
+                  <ArrowRight className="h-5 w-5 text-muted transition group-hover:translate-x-1 group-hover:text-leaf" aria-hidden />
+                </Link>
+              );
+            })}
+          </div>
+          <p className="mt-5 text-center text-sm text-muted">Leva menos de 1 minuto. Você recebe contato pelo WhatsApp.</p>
+        </div>
+      </Container>
     </section>
   );
 }

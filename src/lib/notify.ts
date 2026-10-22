@@ -6,17 +6,17 @@ import { site } from "@/config/site";
  */
 export async function sendEmail(to: string, subject: string, text: string) {
   const key = process.env.RESEND_API_KEY;
-  if (!key || !to || to.startsWith("[")) {
+  if (!key || !to) {
     console.info(`[email:stub] to=${to} subject=${subject}\n${text}`);
     return;
   }
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ from: process.env.EMAIL_FROM ?? `Mind Blast <onboarding@resend.dev>`, to, subject, text }),
+    body: JSON.stringify({ from: process.env.EMAIL_FROM ?? `${site.name} <onboarding@resend.dev>`, to, subject, text }),
   });
   if (!res.ok) console.error("[email] falha ao enviar", res.status, await res.text());
 }
 
 export const notifyOwner = (subject: string, text: string) =>
-  sendEmail(process.env.OWNER_EMAIL ?? site.email, `[Mind Blast] ${subject}`, text);
+  sendEmail(process.env.OWNER_EMAIL ?? site.email, `[${site.name}] ${subject}`, text);

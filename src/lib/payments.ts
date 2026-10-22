@@ -3,10 +3,10 @@ import { formatMoney } from "./pricing";
 import { getOrder, updateOrder } from "./store";
 
 /**
- * Registra um pagamento confirmado pelo provedor. Só é chamado a partir de webhooks verificados.
+ * Registra um pagamento confirmado. Só é chamado por webhooks verificados ou pelo dono logado no painel.
  * Ignora valores diferentes do que o servidor calculou e pagamentos repetidos.
  */
-export async function recordPayment(orderId: string, provider: "mercadopago" | "stripe", paymentId: string, amountCents: number) {
+export async function recordPayment(orderId: string, provider: "mercadopago" | "stripe" | "manual", paymentId: string, amountCents: number) {
   const order = await getOrder(orderId);
   if (!order || order.paymentStatus !== "awaiting_payment") return order;
   if (order.payments?.some((p) => p.id === paymentId)) return order;

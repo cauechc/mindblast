@@ -35,8 +35,13 @@ export type Order = {
   customer: Customer;
   status: OrderStatus;
   paymentStatus: PaymentStatus;
-  /** Pagamentos confirmados pelo provedor (webhook). */
+  /** Pagamentos confirmados pelo provedor (webhook) ou pelo dono no painel. */
   payments?: { provider: "mercadopago" | "stripe" | "manual"; id: string; amount: number; at: string }[];
+  /** Orçamento definido pelo dono para pedidos "Sob consulta". */
+  customQuote?: { amount: number; description: string; at: string };
+  previewUrl?: string;
+  /** Anotações internas do dono. */
+  adminNotes?: string;
 };
 
 export type Lead = {
@@ -155,4 +160,24 @@ export async function createLead(lead: Lead) {
   data.leads.push(lead);
   await save(data);
   return lead;
+}
+
+export async function listOrders(limit = 200) {
+  const q = await db();
+  if (q) {
+    const rows = await q<{ data: Order }[]>`select data from orders order by created_at desc limit ${limit}`;
+    return rows.map((r) => r.data);
+  }
+  const data = await load();
+  return [...data.orders].reverse().slice(0, limit);
+}
+
+export async function listLeads(limit = 200) {
+  const q = await db();
+  if (q) {
+    const rows = await q<{ data: Lead }[]>`select data from leads order by created_at desc limit ${limit}`;
+    return rows.map((r) => r.data);
+  }
+  const data = await load();
+  return [...data.leads].reverse().slice(0, limit);
 }

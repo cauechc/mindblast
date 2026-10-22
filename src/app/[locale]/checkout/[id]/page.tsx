@@ -33,6 +33,7 @@ export default async function CheckoutPage({ params }: { params: Promise<{ local
               <dt className="text-soft">{t.order.summary.service}</dt>
               <dd className="text-white">{t.services.items[order.selection.service].title}</dd>
             </div>
+            {order.customQuote?.description && <p className="whitespace-pre-wrap text-soft">{order.customQuote.description}</p>}
             <div className="flex justify-between">
               <dt className="text-soft">{t.order.summary.total}</dt>
               <dd className="text-white">{formatMoney(quote.total, c)}</dd>

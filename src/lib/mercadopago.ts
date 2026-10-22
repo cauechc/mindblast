@@ -25,7 +25,7 @@ export async function createPixCharge(order: Order): Promise<PixCharge> {
       Authorization: `Bearer ${token()}`,
       "Content-Type": "application/json",
       // Mesmo pedido + mesmo valor = mesma cobrança, evita duplicar se o cliente clicar duas vezes.
-      "X-Idempotency-Key": `${order.id}-${order.quote.dueNow}-${order.paymentStatus}`,
+      "X-Idempotency-Key": `${order.id}-${order.quote.dueNow}-${order.payments?.length ?? 0}`,
     },
     body: JSON.stringify({
       transaction_amount: order.quote.dueNow / 100,

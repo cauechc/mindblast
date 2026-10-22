@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo_Black, Space_Grotesk } from "next/font/google";
 import { notFound } from "next/navigation";
 import { CookieBanner } from "@/components/CookieBanner";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
@@ -8,10 +7,9 @@ import { Header } from "@/components/Header";
 import { Toaster } from "@/components/Toaster";
 import { site } from "@/config/site";
 import { getDictionary, isLocale, locales } from "@/i18n";
+import { archivo, grotesk } from "../fonts";
 import "../globals.css";
 
-const archivo = Archivo_Black({ weight: "400", subsets: ["latin"], variable: "--font-archivo-black", display: "swap" });
-const grotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk", display: "swap" });
 
 export const generateStaticParams = () => locales.map((locale) => ({ locale }));
 

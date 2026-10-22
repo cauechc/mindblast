@@ -33,8 +33,10 @@ Pronto: home, serviços, explicação de landing page, portfólio + página de p
 depoimentos (espaços vazios), contato, "Monte seu pedido", prévia grátis, checkout, LGPD (cookies + páginas),
 SEO (metadata, sitemap, robots, JSON-LD LocalBusiness).
 
-Provisório: pedidos e leads ficam em `.data/db.json` (trocar por PostgreSQL); e-mails só aparecem no log
-sem `RESEND_API_KEY`; Pix aguarda a escolha do provedor; Stripe cria a sessão mas ainda falta webhook e página de sucesso.
+Pagamentos: Pix pelo Mercado Pago (cobrança dinâmica + webhook assinado) com reserva de Pix estático pela chave
+em `config/site.ts`; Stripe Checkout + webhook assinado; página "Pagamento confirmado!". Pedido só vira pago pelo webhook.
+Banco: PostgreSQL via `DATABASE_URL` (sem ela, `.data/db.json`). E-mails só aparecem no log sem `RESEND_API_KEY`.
 
-Próximas etapas: webhooks Stripe/Pix com verificação de assinatura, página de sucesso + envio de materiais,
-banco de dados, login (link mágico) e área do cliente, painel admin com orçamentos personalizados.
+Publicação: ver `DEPLOY.md` (Hostinger).
+
+Próximas etapas: envio de materiais, login (link mágico) e área do cliente, painel admin com orçamentos personalizados.

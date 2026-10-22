@@ -15,10 +15,16 @@ export async function recordPayment(orderId: string, provider: "mercadopago" | "
     await notifyOwner(`Pagamento com valor divergente ${orderId}`, `Recebido ${amountCents}, esperado ${order.quote.dueNow} (${provider} ${paymentId}). Conferir manualmente.`);
     return order;
   }
-  const updated = await updateOrder(orderId, {
-    paymentStatus: order.quote.dueLater > 0 ? "deposit_paid" : "paid",
-    payments: [...(order.payments ?? []), { provider, id: paymentId, amount: amountCents, at: new Date().toISOString() }],
-  });
+  const updated = await updateOrder(
+    orderId,
+    {
+      paymentStatus: order.quote.dueLater > 0 ? "deposit_paid" : "paid",
+      payments: [...(order.payments ?? []), { provider, id: paymentId, amount: amountCents, at: new Date().toISOString() }],
+    },
+    "awaiting_payment",
+  );
+  // Outro webhook já registrou este pagamento.
+  if (!updated) return getOrder(orderId);
   const amount = formatMoney(amountCents, order.quote.currency);
   const pt = order.locale === "pt";
   await Promise.all([

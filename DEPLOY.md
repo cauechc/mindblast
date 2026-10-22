@@ -21,7 +21,8 @@ Business ou Cloud (app Node.js importado do GitHub) ou VPS. A hospedagem Premium
 - **Stripe**: Developers → Webhooks → endpoint `https://SEU-DOMINIO/api/webhooks/stripe`, eventos
   `checkout.session.completed` e `checkout.session.async_payment_succeeded`. Copie o signing secret para `STRIPE_WEBHOOK_SECRET`.
 
-## Antes de receber pedidos de verdade
+## Banco de dados (obrigatório antes de receber pedidos de verdade)
 
-Pedidos e leads hoje ficam no arquivo `.data/db.json`, que pode ser apagado a cada nova publicação.
-Trocar por um banco PostgreSQL (Supabase ou Neon, ambos com plano grátis) antes de abrir para clientes.
+Crie um banco PostgreSQL grátis no Supabase ou Neon e coloque a connection string em `DATABASE_URL`.
+As tabelas são criadas sozinhas no primeiro acesso. Sem `DATABASE_URL`, os pedidos ficam no arquivo
+`.data/db.json`, que pode ser apagado a cada nova publicação.

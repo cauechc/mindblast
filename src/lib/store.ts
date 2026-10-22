@@ -35,6 +35,8 @@ export type Order = {
   customer: Customer;
   status: OrderStatus;
   paymentStatus: PaymentStatus;
+  /** Pagamentos confirmados pelo provedor (webhook). */
+  payments?: { provider: "mercadopago" | "stripe" | "manual"; id: string; amount: number; at: string }[];
 };
 
 export type Lead = {
@@ -96,4 +98,13 @@ export async function createLead(lead: Lead) {
   db.leads.push(lead);
   await save(db);
   return lead;
+}
+
+export async function updateOrder(id: string, patch: Partial<Order>) {
+  const db = await load();
+  const order = db.orders.find((o) => o.id === id);
+  if (!order) return null;
+  Object.assign(order, patch);
+  await save(db);
+  return order;
 }

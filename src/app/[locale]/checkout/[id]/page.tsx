@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { PayButtons } from "@/components/order/PayButtons";
 import { Container, WhatsAppButton } from "@/components/ui";
 import { whatsappUrl } from "@/config/site";
@@ -16,6 +16,7 @@ export default async function CheckoutPage({ params }: { params: Promise<{ local
   const t = getDictionary(locale);
   const order = await getOrder(id);
   if (!order || order.quote.requiresQuote) notFound();
+  if (order.paymentStatus !== "awaiting_payment") redirect(`/${locale}/sucesso/${order.id}`);
   const { quote } = order;
   const c = quote.currency;
 
@@ -50,8 +51,10 @@ export default async function CheckoutPage({ params }: { params: Promise<{ local
           <div className="mt-6">
             <PayButtons
               orderId={order.id}
+              locale={locale}
               currency={c}
-              labels={{ pix: t.checkout.pix, stripe: t.checkout.stripe, notConfigured: t.checkout.notConfigured, error: t.order.sent.error }}
+              t={t}
+              receiptUrl={whatsappUrl(`${t.checkout.sendReceipt}: ${t.checkout.order} ${order.id} (${formatMoney(quote.dueNow, c)})`)}
             />
           </div>
           <div className="mt-6 border-t border-white/8 pt-6 text-center">

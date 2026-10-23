@@ -6,7 +6,9 @@ export const site = {
   tagline: "Orçamentos gratuitos para sua casa",
   description:
     "Receba orçamentos gratuitos de energia solar, móveis planejados e ar-condicionado em Salto, Itu, Indaiatuba e Cabreúva/SP.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.NODE_ENV === "production" ? "https://mindblast.com.br" : "http://localhost:3000"),
+  /** Empresa por trás do projeto. */
+  parent: { name: "MindBlast", url: "https://mindblast.com.br" },
   whatsapp: {
     /** Somente dígitos, com DDI + DDD. */
     number: "5511993626555",
@@ -17,7 +19,7 @@ export const site = {
   city: "Salto",
   state: "SP",
   /** Responsável pelo tratamento dos dados (LGPD). */
-  controller: "Casa Nova Interior",
+  controller: "MindBlast",
   /** CNPJ (opcional). Quando houver, aparece no rodapé e na Política de Privacidade. */
   taxId: "",
 } as const;

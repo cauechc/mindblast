@@ -14,6 +14,7 @@ const jsonLd = {
   email: site.email,
   image: `${site.url}/opengraph-image`,
   priceRange: "Orçamento grátis",
+  parentOrganization: { "@type": "Organization", name: site.parent.name, url: site.parent.url },
   address: { "@type": "PostalAddress", addressLocality: site.city, addressRegion: site.state, addressCountry: "BR" },
   areaServed: cities.map((c) => ({ "@type": "City", name: `${c}, SP` })),
   contactPoint: { "@type": "ContactPoint", telephone: `+${site.whatsapp.number}`, contactType: "customer service", availableLanguage: "Portuguese" },

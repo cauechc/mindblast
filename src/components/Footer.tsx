@@ -11,7 +11,7 @@ export function Footer() {
         <div className="lg:col-span-1">
           <Logo light />
           <p className="mt-4 text-sm leading-relaxed text-navy-100/75">
-            Plataforma regional que conecta moradores a profissionais de serviços residenciais. O orçamento é gratuito e sem compromisso.
+            Plataforma regional que conecta moradores a profissionais de serviços residenciais. O orçamento é gratuito e sem compromisso. Um projeto da MindBlast.
           </p>
         </div>
 
@@ -74,7 +74,14 @@ export function Footer() {
           </nav>
         </Container>
         <Container className="pb-8 text-xs text-navy-100/50">
-          © {new Date().getFullYear()} {site.name}{site.taxId ? ` · CNPJ ${site.taxId}` : ""}. Salto, Itu, Indaiatuba e Cabreúva/SP.
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <p>
+              © {new Date().getFullYear()} {site.name}, um projeto da {site.parent.name}{site.taxId ? ` · CNPJ ${site.taxId}` : ""}. Salto, Itu, Indaiatuba e Cabreúva/SP.
+            </p>
+            <p className="text-navy-100/70">
+              Powered by <span className="font-bold text-white">{site.parent.name}</span>
+            </p>
+          </div>
         </Container>
       </div>
     </footer>

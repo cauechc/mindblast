@@ -3,7 +3,8 @@ import { Check } from "lucide-react";
 import { services, type City } from "@/config/site";
 import { serviceCityPath, servicePath } from "@/lib/paths";
 import { serviceIcons } from "../icons";
-import { Container, LinkButton, SectionHeading } from "../ui";
+import { QuoteLink } from "../QuoteLink";
+import { buttonStyles, Container, SectionHeading } from "../ui";
 
 /** Na página de uma cidade, os links levam para "serviço em cidade". */
 export function Services({ city }: { city?: City }) {
@@ -37,9 +38,9 @@ export function Services({ city }: { city?: City }) {
                     </li>
                   ))}
                 </ul>
-                <LinkButton href={`?servico=${s.id}#orcamento`} scroll={false} variant="outline" className="mt-7 w-full">
+                <QuoteLink service={s.id} className={`${buttonStyles.outline} mt-7 w-full`}>
                   Pedir orçamento
-                </LinkButton>
+                </QuoteLink>
                 <Link href={city ? serviceCityPath(s.id, city) : servicePath(s.id)} className="mt-3 text-center text-sm font-semibold text-muted hover:text-leaf-600">
                   Saiba mais sobre {s.name.toLowerCase()}
                 </Link>

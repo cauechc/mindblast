@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Logo } from "./icons";
-import { LinkButton } from "./ui";
+import { QuoteLink } from "./QuoteLink";
+import { buttonStyles } from "./ui";
 
 const nav = [
   { href: "/#servicos", label: "Serviços" },
@@ -22,10 +23,10 @@ export function Header() {
             </Link>
           ))}
         </nav>
-        <LinkButton href="/#orcamento" className="!px-4 !py-2.5 !text-sm">
+        <QuoteLink className={`${buttonStyles.primary} !px-4 !py-2.5 !text-sm`}>
           <span className="hidden sm:inline">Solicitar Orçamento</span>
           <span className="sm:hidden">Orçamento grátis</span>
-        </LinkButton>
+        </QuoteLink>
       </div>
     </header>
   );

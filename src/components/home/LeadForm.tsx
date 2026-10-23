@@ -81,7 +81,7 @@ export function LeadForm({ defaultService, defaultCity }: { defaultService?: Ser
         <CircleCheck className="mx-auto h-14 w-14 text-leaf" aria-hidden />
         <h3 className="mt-4 text-2xl font-extrabold text-navy-900">Pedido recebido!</h3>
         <p className="mt-2 text-muted">
-          Número do pedido <strong className="font-mono text-navy-900">{done.id}</strong>. Vamos buscar até 3 orçamentos para você, e os especialistas entram em contato pelo seu WhatsApp.
+          Número do pedido <strong className="font-mono text-navy-900">{done.id}</strong>. Vamos buscar orçamentos para você comparar, e os especialistas entram em contato pelo seu WhatsApp.
         </p>
         <a href={done.whatsappUrl} target="_blank" rel="noopener noreferrer" className={`${buttonStyles.primary} mt-6 w-full !bg-wa hover:!bg-[#1ebe5a]`}>
           <WhatsAppIcon className="h-5 w-5" />
@@ -95,7 +95,7 @@ export function LeadForm({ defaultService, defaultCity }: { defaultService?: Ser
 
   return (
     <form onSubmit={submit} noValidate className="rounded-3xl bg-white p-6 shadow-2xl sm:p-8">
-      <p className="mb-5 rounded-xl bg-leaf-50 px-4 py-2.5 text-center text-sm font-bold text-leaf-600">Receba até 3 orçamentos gratuitos</p>
+      <p className="mb-5 rounded-xl bg-leaf-50 px-4 py-2.5 text-center text-sm font-bold text-leaf-600">Compare orçamentos sem ligar para dez empresas</p>
       <fieldset>
         <legend className="text-sm font-bold text-navy-900">Serviço desejado</legend>
         <div className="mt-2 grid grid-cols-3 gap-2">
@@ -196,7 +196,7 @@ export function LeadForm({ defaultService, defaultCity }: { defaultService?: Ser
       {err("consent")}
 
       <button type="submit" disabled={status === "sending"} className={`${buttonStyles.primary} mt-6 w-full !py-4 text-lg`}>
-        {status === "sending" ? "Enviando…" : "Solicitar Orçamento Gratuito"}
+        {status === "sending" ? "Enviando…" : "Solicitar Orçamento"}
       </button>
       {status === "error" && Object.keys(errors).length === 0 && (
         <p className="mt-3 text-center text-sm font-semibold text-red-600">Não foi possível enviar agora. Tente de novo ou chame no WhatsApp.</p>

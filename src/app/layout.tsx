@@ -3,7 +3,7 @@ import { cities, services, site } from "@/config/site";
 import { jakarta } from "./fonts";
 import "./globals.css";
 
-const title = "Orçamentos grátis para sua casa em Salto, Itu e região | Casa Nova Interior";
+const title = "Compare orçamentos para sua casa em Salto, Itu e região | Casa Nova Interior";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     siteName: site.name,
-    title: "Receba orçamentos gratuitos para sua casa em poucos minutos",
+    title: "Compare orçamentos para sua casa sem ligar para dez empresas",
     description: site.description,
     url: "/",
   },

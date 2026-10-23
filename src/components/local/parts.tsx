@@ -114,7 +114,7 @@ export function ServiceJsonLd({ name, description, cities, url }: { name: string
     serviceType: name,
     provider: { "@id": `${site.url}/#empresa` },
     areaServed: cities.map((c) => ({ "@type": "City", name: `${c}, SP` })),
-    offers: { "@type": "Offer", price: "0", priceCurrency: "BRL", description: "Orçamento gratuito" },
+    offers: { "@type": "Offer", price: "0", priceCurrency: "BRL", description: "Você não paga nada para pedir" },
   };
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />;
 }

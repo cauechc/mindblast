@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const c = serviceContent[service.id];
   return {
     title: `${c.howMuch} em Salto e região (2026)`,
-    description: `Faixas de preço de ${c.noun} em Salto, Itu, Indaiatuba e Cabreúva, o que muda o valor e como economizar. Receba até 3 orçamentos grátis.`,
+    description: `Faixas de preço de ${c.noun} em Salto, Itu, Indaiatuba e Cabreúva, o que muda o valor e como economizar. Compare orçamentos sem ligar para dez empresas.`,
     alternates: { canonical: pricePath(service.id) },
   };
 }
@@ -90,7 +90,7 @@ export default async function PricePage({ params }: Props) {
               <li key={f}>{f}</li>
             ))}
           </ul>
-          <p>O jeito mais simples de saber o preço certo para a sua casa é comparar propostas. Peça abaixo e receba até 3 orçamentos gratuitos.</p>
+          <p>O jeito mais simples de saber o preço certo para a sua casa é comparar propostas. Peça abaixo: você não paga nada para pedir.</p>
         </Prose>
         <LinkGrid
           title={`Orçamento de ${c.noun} na sua cidade`}

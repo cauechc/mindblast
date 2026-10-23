@@ -17,8 +17,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const city = cityBySlug((await params).cidade);
   if (!city) return {};
   return {
-    title: `Serviços para sua casa em ${city}/SP: orçamentos grátis`,
-    description: `Energia solar, móveis planejados e ar-condicionado em ${city}/SP. Receba até 3 orçamentos gratuitos de profissionais da cidade.`,
+    title: `Serviços para sua casa em ${city}/SP: compare orçamentos`,
+    description: `Energia solar, móveis planejados e ar-condicionado em ${city}/SP. Compare orçamentos de profissionais da cidade sem ligar para dez empresas.`,
     alternates: { canonical: cityPath(city) },
   };
 }

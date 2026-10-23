@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { ArrowRight, CircleCheck, MapPin } from "lucide-react";
 import { cities, services, site, whatsappUrl } from "@/config/site";
 import { serviceIcons, WhatsAppIcon } from "../icons";
+import { QuoteLink } from "../QuoteLink";
 import { Container, LinkButton } from "../ui";
 
 const perks = ["Até 3 orçamentos grátis", "Sem compromisso", "Profissionais da região"];
@@ -54,10 +54,9 @@ export function Hero() {
             {services.map((s) => {
               const Icon = serviceIcons[s.id];
               return (
-                <Link
+                <QuoteLink
                   key={s.id}
-                  href={`/?servico=${s.id}#orcamento`}
-                  scroll={false}
+                  service={s.id}
                   className="group flex items-center gap-4 rounded-2xl border-2 border-navy-100 p-4 transition hover:border-leaf hover:bg-leaf-50"
                 >
                   <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-navy-900 text-leaf-400">
@@ -65,7 +64,7 @@ export function Hero() {
                   </span>
                   <span className="flex-1 text-lg font-bold text-navy-900">{s.name}</span>
                   <ArrowRight className="h-5 w-5 text-muted transition group-hover:translate-x-1 group-hover:text-leaf" aria-hidden />
-                </Link>
+                </QuoteLink>
               );
             })}
           </div>

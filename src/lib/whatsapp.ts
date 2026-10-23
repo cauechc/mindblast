@@ -1,51 +1,25 @@
-import { whatsappUrl } from "@/config/site";
-import { plans, services, type ServiceId } from "@/config/pricing";
-import { fill, type Dictionary } from "@/i18n";
-import { formatMoney, formatPrice, quoteOrder, type Currency, type OrderSelection } from "./pricing";
+import { serviceName, site, whatsappUrl } from "@/config/site";
+import type { Lead } from "./store";
 
-export const waGeneric = (t: Dictionary) => whatsappUrl(t.wa.generic);
+/**
+ * Mensagens de WhatsApp. Hoje abrem o wa.me; quando houver a API oficial (WhatsApp Cloud API),
+ * basta trocar o envio aqui sem mexer no formulário.
+ */
 
-export function waService(t: Dictionary, id: ServiceId, currency: Currency) {
-  const service = services.find((s) => s.id === id)!;
-  const name = t.services.items[id].title;
-  const price = formatPrice(service.from, currency);
-  return whatsappUrl(
-    price ? fill(t.wa.service, { service: name, price: `${t.common.from} ${price}` }) : fill(t.wa.serviceQuote, { service: name }),
+/** Mensagem que o próprio morador manda para a plataforma depois de enviar o formulário. */
+export const leadToPlatformUrl = (lead: Pick<Lead, "id" | "name" | "service" | "city">) =>
+  whatsappUrl(
+    `Olá! Sou ${lead.name}, de ${lead.city}. Acabei de pedir um orçamento de ${serviceName(lead.service)} no site ${site.name} (pedido ${lead.id}).`,
   );
+
+/** Link para o dono falar com o morador a partir do painel. */
+export const platformToLeadUrl = (lead: Pick<Lead, "whatsapp" | "name" | "service">) =>
+  `https://wa.me/${lead.whatsapp}?text=${encodeURIComponent(
+    `Olá, ${lead.name.split(" ")[0]}! Aqui é da ${site.name}. Recebemos seu pedido de orçamento de ${serviceName(lead.service)}. Podemos conversar?`,
+  )}`;
+
+/** Exibe 5511999999999 como (11) 99999-9999. */
+export function formatPhone(digits: string) {
+  const d = digits.replace(/^55/, "");
+  return d.length === 11 ? `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}` : d.length === 10 ? `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}` : digits;
 }
-
-export function waPlan(t: Dictionary, planId: (typeof plans)[number]["id"], currency: Currency) {
-  const plan = plans.find((p) => p.id === planId)!;
-  const name = `${t.pricing.plans[planId].service} (${t.pricing.plans[planId].name})`;
-  const price = formatPrice(plan.price, currency);
-  return whatsappUrl(
-    price ? fill(t.wa.service, { service: name, price: `${t.common.from} ${price}` }) : fill(t.wa.serviceQuote, { service: name }),
-  );
-}
-
-export const waProject = (t: Dictionary, projectType: string) =>
-  whatsappUrl(fill(t.wa.project, { project: projectType }));
-
-/** Mensagem com o pedido montado: serviço, plano, adicionais e total. */
-export function orderMessage(t: Dictionary, sel: OrderSelection) {
-  const q = quoteOrder(sel);
-  const lines = q.lines.map((l) => {
-    const name =
-      l.kind === "plan"
-        ? `${t.pricing.plans[l.id as keyof Dictionary["pricing"]["plans"]].service} – ${t.pricing.plans[l.id as keyof Dictionary["pricing"]["plans"]].name}`
-        : l.kind === "service"
-          ? t.services.items[l.id as ServiceId].title
-          : `+ ${t.order.addons[l.id as keyof Dictionary["order"]["addons"]]}`;
-    const price = l.amount === null ? t.common.onRequest : formatMoney(l.amount, q.currency);
-    return `• ${name}: ${price}`;
-  });
-  if (!q.requiresQuote) {
-    const payment = sel.paymentOption === "full" ? t.order.payment.full : t.order.payment.deposit;
-    lines.push(`• ${payment}`);
-  }
-  return q.requiresQuote
-    ? fill(t.wa.orderQuote, { lines: lines.join("\n") })
-    : fill(t.wa.order, { lines: lines.join("\n"), total: formatMoney(q.total, q.currency) });
-}
-
-export const waOrder = (t: Dictionary, sel: OrderSelection) => whatsappUrl(orderMessage(t, sel));

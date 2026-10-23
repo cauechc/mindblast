@@ -1,20 +1,42 @@
 import { NextResponse } from "next/server";
+import { serviceName } from "@/config/site";
+import { sendToCrm } from "@/lib/crm";
 import { notifyOwner } from "@/lib/notify";
-import { leadSchema, localeSchema } from "@/lib/schemas";
-import { createLead, newId } from "@/lib/store";
+import { leadSchema } from "@/lib/schemas";
+import { createLead, newId, updateLead, type Lead } from "@/lib/store";
+import { formatPhone, leadToPlatformUrl, platformToLeadUrl } from "@/lib/whatsapp";
 
-const bodySchema = leadSchema.extend({ locale: localeSchema });
+// Limite simples por IP para conter spam: 5 pedidos a cada 10 minutos.
+const hits = new Map<string, number[]>();
+function limited(ip: string) {
+  const now = Date.now();
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < 10 * 60_000);
+  recent.push(now);
+  hits.set(ip, recent);
+  return recent.length > 5;
+}
 
-/** Pedido de prévia grátis. */
+/** Pedido de orçamento enviado pelo formulário. */
 export async function POST(req: Request) {
-  const parsed = bodySchema.safeParse(await req.json().catch(() => null));
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "local";
+  if (limited(ip)) return NextResponse.json({ error: "rate_limited" }, { status: 429 });
+
+  const parsed = leadSchema.safeParse(await req.json().catch(() => null));
   if (!parsed.success) {
-    return NextResponse.json({ error: "invalid", fields: parsed.error.flatten().fieldErrors }, { status: 400 });
+    const fields = Object.fromEntries(parsed.error.issues.map((i) => [String(i.path[0]), i.message]));
+    return NextResponse.json({ error: "invalid", fields }, { status: 400 });
   }
-  const lead = await createLead({ id: newId("PV"), createdAt: new Date().toISOString(), ...parsed.data });
+  const { name, whatsapp, city, service, description, source } = parsed.data;
+  const now = new Date().toISOString();
+  let lead: Lead = { id: newId(), createdAt: now, name, whatsapp, city, service, description, source, consentAt: now, status: "novo" };
+  await createLead(lead);
+
+  const crm = await sendToCrm(lead);
+  if (crm) lead = (await updateLead(lead.id, { crm })) ?? lead;
+
   await notifyOwner(
-    `Prévia grátis ${lead.id}`,
-    `${lead.name} · ${lead.whatsapp}\nRamo: ${lead.industry} · Cidade: ${lead.city}\nLink: ${lead.link}`,
+    `Novo orçamento ${lead.id}: ${serviceName(lead.service)} em ${lead.city}`,
+    `${lead.name} · ${formatPhone(lead.whatsapp)}\n${serviceName(lead.service)} · ${lead.city}\n\n${lead.description || "(sem descrição)"}\n\nResponder no WhatsApp: ${platformToLeadUrl(lead)}`,
   );
-  return NextResponse.json({ id: lead.id });
+  return NextResponse.json({ id: lead.id, whatsappUrl: leadToPlatformUrl(lead) });
 }

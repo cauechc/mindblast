@@ -1,31 +1,24 @@
 import { z } from "zod";
+import { cities, serviceIds } from "@/config/site";
 
-const text = (max = 120) => z.string().trim().min(1).max(max);
-const phone = z
+/** Aceita (11) 99999-9999, 11999999999 ou +55 11 99999-9999 e devolve 5511999999999. */
+const whatsapp = z
   .string()
   .trim()
-  .refine((v) => v.replace(/\D/g, "").length >= 10 && v.replace(/\D/g, "").length <= 15, "phone");
-
-export const customerSchema = z.object({
-  name: text(),
-  company: text(),
-  whatsapp: phone,
-  email: z.string().trim().email().max(160),
-  industry: text(),
-  city: text(),
-  instagram: z.string().trim().max(160).optional().default(""),
-  hasLogo: z.boolean(),
-  hasDomain: z.boolean(),
-  notes: z.string().trim().max(2000).optional().default(""),
-  needs: z.string().trim().max(4000).optional().default(""),
-});
+  .transform((v) => v.replace(/\D/g, "").replace(/^0+/, ""))
+  .transform((d) => (d.length === 10 || d.length === 11 ? `55${d}` : d))
+  .refine((d) => /^55\d{10,11}$/.test(d), "Informe um WhatsApp com DDD.");
 
 export const leadSchema = z.object({
-  name: text(),
-  whatsapp: phone,
-  industry: text(),
-  city: text(),
-  link: z.string().trim().min(3).max(300),
+  name: z.string().trim().min(3, "Informe seu nome completo.").max(120),
+  whatsapp,
+  city: z.enum(cities, "Escolha sua cidade."),
+  service: z.enum(serviceIds, "Escolha um serviço."),
+  description: z.string().trim().max(2000).default(""),
+  consent: z.literal(true, "É preciso aceitar a Política de Privacidade."),
+  source: z.record(z.string().max(40), z.string().max(200)).optional(),
+  /** Campo escondido: se vier preenchido, é robô. */
+  website: z.string().max(0).optional(),
 });
 
-export const localeSchema = z.enum(["pt", "en"]);
+export type LeadInput = z.input<typeof leadSchema>;

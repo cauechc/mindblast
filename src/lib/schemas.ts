@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { cities, serviceIds } from "@/config/site";
+import { cities, propertyTypes, serviceIds } from "@/config/site";
 
 /** Aceita (11) 99999-9999, 11999999999 ou +55 11 99999-9999 e devolve 5511999999999. */
 const whatsapp = z
@@ -14,6 +14,7 @@ export const leadSchema = z.object({
   whatsapp,
   city: z.enum(cities, "Escolha sua cidade."),
   service: z.enum(serviceIds, "Escolha um serviço."),
+  propertyType: z.enum(propertyTypes, "Escolha o tipo de imóvel."),
   description: z.string().trim().max(2000).default(""),
   consent: z.literal(true, "É preciso aceitar a Política de Privacidade."),
   source: z.record(z.string().max(40), z.string().max(200)).optional(),

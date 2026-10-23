@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Mail, MapPin } from "lucide-react";
+import { serviceContent } from "@/config/content";
 import { cities, services, site, whatsappUrl } from "@/config/site";
+import { cityPath, pricePath, serviceCityPath, servicePath } from "@/lib/paths";
 import { Logo, WhatsAppIcon } from "./icons";
 import { Container } from "./ui";
 
@@ -19,9 +21,11 @@ export function Footer() {
           <h2 className="text-sm font-bold uppercase tracking-wider text-white">Cidades atendidas</h2>
           <ul className="mt-4 space-y-2 text-sm">
             {cities.map((c) => (
-              <li key={c} className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-leaf-400" aria-hidden />
-                {c}/SP
+              <li key={c}>
+                <Link href={cityPath(c)} className="flex items-center gap-2 hover:text-white">
+                  <MapPin className="h-4 w-4 text-leaf-400" aria-hidden />
+                  {c}/SP
+                </Link>
               </li>
             ))}
           </ul>
@@ -32,8 +36,15 @@ export function Footer() {
           <ul className="mt-4 space-y-2 text-sm">
             {services.map((s) => (
               <li key={s.id}>
-                <Link href={`/?servico=${s.id}#orcamento`} className="hover:text-white">
+                <Link href={servicePath(s.id)} className="hover:text-white">
                   {s.name}
+                </Link>
+              </li>
+            ))}
+            {services.map((s) => (
+              <li key={`preco-${s.id}`}>
+                <Link href={pricePath(s.id)} className="text-navy-100/70 hover:text-white">
+                  {serviceContent[s.id].howMuch}
                 </Link>
               </li>
             ))}
@@ -59,6 +70,21 @@ export function Footer() {
         </div>
       </Container>
 
+      <Container className="pb-10">
+        <h2 className="text-xs font-bold uppercase tracking-wider text-white/80">Orçamentos por cidade</h2>
+        <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-xs text-navy-100/70">
+          {services.flatMap((s) =>
+            cities.map((c) => (
+              <li key={`${s.id}-${c}`}>
+                <Link href={serviceCityPath(s.id, c)} className="hover:text-white">
+                  {s.name} em {c}
+                </Link>
+              </li>
+            )),
+          )}
+        </ul>
+      </Container>
+
       <div className="border-t border-white/10">
         <Container className="flex flex-col gap-3 py-6 text-xs text-navy-100/70 sm:flex-row sm:items-center sm:justify-between">
           <p>
@@ -67,6 +93,9 @@ export function Footer() {
           <nav className="flex shrink-0 gap-5">
             <Link href="/privacidade" className="underline-offset-2 hover:text-white hover:underline">
               Política de Privacidade
+            </Link>
+            <Link href="/termos" className="underline-offset-2 hover:text-white hover:underline">
+              Termos de Uso
             </Link>
             <Link href="/privacidade#direitos" className="underline-offset-2 hover:text-white hover:underline">
               Seus direitos (LGPD)

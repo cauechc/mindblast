@@ -97,7 +97,7 @@ export default async function AdminPage() {
                 </td>
                 <td className="px-4 py-4">
                   <p className="font-semibold text-navy-900">{serviceName(l.service)}</p>
-                  <p className="text-muted">{l.city}</p>
+                  <p className="text-muted">{l.city}{l.propertyType ? ` · ${l.propertyType}` : ""}</p>
                 </td>
                 <td className="max-w-sm whitespace-pre-line px-4 py-4 text-muted">{l.description || "—"}</td>
                 <td className="px-4 py-4">

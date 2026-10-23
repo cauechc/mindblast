@@ -1,3 +1,4 @@
+import { Analytics } from "@/components/Analytics";
 import { FloatingWhatsApp } from "@/components/FloatingWhatsApp";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
@@ -40,6 +41,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <main>{children}</main>
       <Footer />
       <FloatingWhatsApp />
+      <Analytics />
     </>
   );
 }

@@ -4,7 +4,7 @@ import { Container, LinkButton, SectionHeading } from "../ui";
 const steps = [
   { icon: MousePointerClick, title: "Escolha o serviço", text: "Energia solar, móveis planejados ou ar-condicionado." },
   { icon: ClipboardList, title: "Preencha seu pedido", text: "Conte rapidamente o que você precisa. Leva menos de 1 minuto." },
-  { icon: MessageCircle, title: "Receba contato especializado", text: "Um profissional da sua região fala com você pelo WhatsApp." },
+  { icon: MessageCircle, title: "Receba contato especializado", text: "Até 3 profissionais da sua região enviam orçamentos pelo WhatsApp." },
 ];
 
 export function HowItWorks() {

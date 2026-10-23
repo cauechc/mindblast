@@ -26,9 +26,9 @@ export async function POST(req: Request) {
     const fields = Object.fromEntries(parsed.error.issues.map((i) => [String(i.path[0]), i.message]));
     return NextResponse.json({ error: "invalid", fields }, { status: 400 });
   }
-  const { name, whatsapp, city, service, description, source } = parsed.data;
+  const { name, whatsapp, city, service, propertyType, description, source } = parsed.data;
   const now = new Date().toISOString();
-  let lead: Lead = { id: newId(), createdAt: now, name, whatsapp, city, service, description, source, consentAt: now, status: "novo" };
+  let lead: Lead = { id: newId(), createdAt: now, name, whatsapp, city, service, propertyType, description, source, consentAt: now, status: "novo" };
   await createLead(lead);
 
   const crm = await sendToCrm(lead);
@@ -36,7 +36,7 @@ export async function POST(req: Request) {
 
   await notifyOwner(
     `Novo orçamento ${lead.id}: ${serviceName(lead.service)} em ${lead.city}`,
-    `${lead.name} · ${formatPhone(lead.whatsapp)}\n${serviceName(lead.service)} · ${lead.city}\n\n${lead.description || "(sem descrição)"}\n\nResponder no WhatsApp: ${platformToLeadUrl(lead)}`,
+    `${lead.name} · ${formatPhone(lead.whatsapp)}\n${serviceName(lead.service)} · ${lead.city} · ${lead.propertyType}\n\n${lead.description || "(sem descrição)"}\n\nResponder no WhatsApp: ${platformToLeadUrl(lead)}`,
   );
   return NextResponse.json({ id: lead.id, whatsappUrl: leadToPlatformUrl(lead) });
 }

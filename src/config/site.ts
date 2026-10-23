@@ -27,6 +27,16 @@ export const site = {
 export const cities = ["Salto", "Itu", "Indaiatuba", "Cabreúva"] as const;
 export type City = (typeof cities)[number];
 
+/** Slug de URL de cada cidade: /energia-solar/cabreuva. */
+export const citySlug = (c: City) => c.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+export const cityBySlug = (slug: string) => cities.find((c) => citySlug(c) === slug);
+
+export const propertyTypes = ["Casa", "Casa em condomínio", "Apartamento", "Chácara ou sítio", "Comercial"] as const;
+export type PropertyType = (typeof propertyTypes)[number];
+
+/** Promessa principal da plataforma. */
+export const promise = "Receba até 3 orçamentos gratuitos";
+
 export const services = [
   {
     id: "energia-solar",
@@ -51,6 +61,7 @@ export const services = [
 export type ServiceId = (typeof services)[number]["id"];
 export const serviceIds = services.map((s) => s.id) as [ServiceId, ...ServiceId[]];
 export const serviceName = (id: string) => services.find((s) => s.id === id)?.name ?? id;
+export const serviceById = (id: string) => services.find((s) => s.id === id);
 
 export const whatsappUrl = (text?: string) =>
   `https://wa.me/${site.whatsapp.number}${text ? `?text=${encodeURIComponent(text)}` : ""}`;

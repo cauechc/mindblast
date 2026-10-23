@@ -4,7 +4,7 @@ import { serviceIcons, WhatsAppIcon } from "../icons";
 import { QuoteLink } from "../QuoteLink";
 import { Container, LinkButton } from "../ui";
 
-const perks = ["Até 3 orçamentos grátis", "Sem compromisso", "Profissionais da região"];
+const perks = ["Um pedido só", "Sem compromisso", "Profissionais da região"];
 
 export function Hero() {
   return (
@@ -18,10 +18,10 @@ export function Hero() {
             {cities.join(" · ")}
           </p>
           <h1 className="mt-6 text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]">
-            Receba orçamentos <span className="text-leaf-400">gratuitos</span> para sua casa em poucos minutos
+            Compare orçamentos para sua casa <span className="text-leaf-400">sem ligar para dez empresas</span>
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-navy-100 sm:text-xl">
-            Conectamos moradores de Salto, Itu, Indaiatuba e Cabreúva aos melhores serviços para sua casa.
+            Você não paga nada para pedir. Conte o que precisa e receba o retorno pelo WhatsApp.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <LinkButton href="#orcamento" className="text-lg sm:!px-8 sm:!py-4">

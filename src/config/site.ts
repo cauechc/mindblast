@@ -3,9 +3,9 @@
  */
 export const site = {
   name: "Casa Nova Interior",
-  tagline: "Orçamentos gratuitos para sua casa",
+  tagline: "Compare orçamentos para sua casa",
   description:
-    "Receba orçamentos gratuitos de energia solar, móveis planejados e ar-condicionado em Salto, Itu, Indaiatuba e Cabreúva/SP.",
+    "Compare orçamentos de energia solar, móveis planejados e ar-condicionado em Salto, Itu, Indaiatuba e Cabreúva/SP.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.NODE_ENV === "production" ? "https://mindblast.com.br" : "http://localhost:3000"),
   /** Empresa por trás do projeto. */
   parent: { name: "MindBlast", url: "https://mindblast.com.br" },
@@ -35,7 +35,7 @@ export const propertyTypes = ["Casa", "Casa em condomínio", "Apartamento", "Ch�
 export type PropertyType = (typeof propertyTypes)[number];
 
 /** Promessa principal da plataforma. */
-export const promise = "Receba até 3 orçamentos gratuitos";
+export const promise = "Compare orçamentos sem ligar para dez empresas";
 
 export const services = [
   {

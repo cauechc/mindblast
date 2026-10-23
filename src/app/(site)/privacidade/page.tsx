@@ -38,7 +38,7 @@ const sections: { id?: string; h: string; p: string[] }[] = [
   {
     h: "5. Compartilhamento",
     p: [
-      "Seus dados são compartilhados somente com até 3 profissionais ou empresas parceiras do serviço que você escolheu, e apenas para que eles possam fazer o orçamento.",
+      "Seus dados são compartilhados somente com os profissionais ou empresas parceiras do serviço que você escolheu, e apenas para que eles possam fazer o orçamento.",
       "Também usamos fornecedores de tecnologia (hospedagem, banco de dados, e-mail e CRM) que tratam os dados em nosso nome e sob contrato. Não vendemos seus dados.",
     ],
   },

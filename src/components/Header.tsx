@@ -25,7 +25,7 @@ export function Header() {
         </nav>
         <QuoteLink className={`${buttonStyles.primary} !px-4 !py-2.5 !text-sm`}>
           <span className="hidden sm:inline">Solicitar Orçamento</span>
-          <span className="sm:hidden">Orçamento grátis</span>
+          <span className="sm:hidden">Pedir orçamento</span>
         </QuoteLink>
       </div>
     </header>

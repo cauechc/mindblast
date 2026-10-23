@@ -26,8 +26,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { service, city } = data;
   const noun = serviceContent[service.id].noun;
   return {
-    title: `${service.name} em ${city}/SP: até 3 orçamentos grátis`,
-    description: `Precisa de ${noun} em ${city}? Receba até 3 orçamentos gratuitos de profissionais que atendem ${city}/SP. Rápido, sem compromisso e pelo WhatsApp.`,
+    title: `${service.name} em ${city}/SP: compare orçamentos`,
+    description: `Precisa de ${noun} em ${city}? Compare orçamentos de profissionais que atendem ${city}/SP sem ligar para dez empresas. Você não paga nada para pedir.`,
     alternates: { canonical: serviceCityPath(service.id, city) },
   };
 }
@@ -40,7 +40,7 @@ export default async function ServiceCityPage({ params }: Props) {
   const cc = cityContent[city];
   const faq = [
     { q: `Vocês atendem todos os bairros de ${city}?`, a: cc.neighborhoods },
-    { q: `Quanto custa pedir orçamento de ${c.noun} em ${city}?`, a: "Nada. O pedido é gratuito e sem compromisso, e você pode receber até 3 orçamentos para comparar." },
+    { q: `Quanto custa pedir orçamento de ${c.noun} em ${city}?`, a: "Nada. Você não paga nada para pedir e não tem compromisso: compara as propostas e decide se quer fechar." },
     ...c.faq,
   ];
 
@@ -54,7 +54,7 @@ export default async function ServiceCityPage({ params }: Props) {
           { name: city, href: serviceCityPath(service.id, city) },
         ]}
         title={`${service.name} em ${city}/SP`}
-        subtitle={`Receba até 3 orçamentos gratuitos de ${c.noun} com profissionais que atendem ${city}. ${service.short}`}
+        subtitle={`Compare orçamentos de ${c.noun} com profissionais que atendem ${city}, sem ligar para dez empresas. ${service.short}`}
       />
       <Container className="max-w-4xl space-y-14 py-16 sm:py-20">
         <Prose title={`${service.name} para sua casa em ${city}`}>
@@ -73,7 +73,7 @@ export default async function ServiceCityPage({ params }: Props) {
             ))}
           </ul>
           <p>
-            Com a Casa Nova Interior você descreve o que precisa uma vez e recebe propostas de até 3 profissionais que atendem {city}, sem precisar
+            Com a Casa Nova Interior você descreve o que precisa uma vez e recebe propostas de profissionais que atendem {city}, sem precisar
             procurar empresa por empresa.
           </p>
         </Prose>

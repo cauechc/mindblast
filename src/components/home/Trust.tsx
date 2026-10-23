@@ -3,7 +3,7 @@ import { cities } from "@/config/site";
 import { Container } from "../ui";
 
 const points = [
-  { icon: BadgeCheck, title: "Profissionais selecionados", text: "Trabalhamos com empresas e técnicos que atendem a região." },
+  { icon: BadgeCheck, title: "Profissionais da região", text: "Buscamos empresas e técnicos que atendem a sua cidade." },
   { icon: Users, title: "Atendimento humano", text: "Seu pedido é lido por uma pessoa, não por um robô." },
   { icon: Lock, title: "Dados protegidos", text: "Seguimos a LGPD. Seu contato não é vendido nem divulgado." },
 ];

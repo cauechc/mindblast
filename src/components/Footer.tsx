@@ -13,7 +13,7 @@ export function Footer() {
         <div className="lg:col-span-1">
           <Logo light />
           <p className="mt-4 text-sm leading-relaxed text-navy-100/75">
-            Plataforma regional que conecta moradores a profissionais de serviços residenciais. O orçamento é gratuito e sem compromisso. Um projeto da MindBlast.
+            Plataforma regional que conecta moradores a profissionais de serviços residenciais. Você não paga nada para pedir. Um projeto da MindBlast.
           </p>
         </div>
 

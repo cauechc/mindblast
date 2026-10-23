@@ -17,8 +17,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = serviceById((await params).servico);
   if (!service) return {};
   return {
-    title: `${service.name} em Salto, Itu, Indaiatuba e Cabreúva: orçamento grátis`,
-    description: `Receba até 3 orçamentos gratuitos de ${serviceContent[service.id].noun} em Salto, Itu, Indaiatuba e Cabreúva/SP. ${service.short}`,
+    title: `${service.name} em Salto, Itu, Indaiatuba e Cabreúva: compare orçamentos`,
+    description: `Compare orçamentos de ${serviceContent[service.id].noun} em Salto, Itu, Indaiatuba e Cabreúva/SP. ${service.short}`,
     alternates: { canonical: servicePath(service.id) },
   };
 }
@@ -35,7 +35,7 @@ export default async function ServicePage({ params }: Props) {
       <PageHero
         crumbs={[{ name: service.name, href: servicePath(service.id) }]}
         title={`${service.name} em Salto, Itu, Indaiatuba e Cabreúva`}
-        subtitle={`${service.short} Compare até 3 orçamentos gratuitos de profissionais da sua cidade.`}
+        subtitle={`${service.short} Compare orçamentos de profissionais da sua cidade sem ligar para dez empresas.`}
       />
       <Container className="max-w-4xl space-y-14 py-16 sm:py-20">
         <Prose title={c.howTitle}>
@@ -55,7 +55,7 @@ export default async function ServicePage({ params }: Props) {
         </Prose>
         <LinkGrid
           title={`${service.name} na sua cidade`}
-          links={cities.map((city) => ({ href: serviceCityPath(service.id, city), label: `${service.name} em ${city}`, hint: "Orçamento grátis" }))}
+          links={cities.map((city) => ({ href: serviceCityPath(service.id, city), label: `${service.name} em ${city}`, hint: "Compare orçamentos" }))}
         />
         <LinkGrid title="Quanto custa?" links={[{ href: pricePath(service.id), label: c.howMuch, hint: "Faixas de preço e o que muda o valor" }]} />
       </Container>

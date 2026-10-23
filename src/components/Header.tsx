@@ -23,7 +23,7 @@ export function Header() {
             </Link>
           ))}
         </nav>
-        <QuoteLink className={`${buttonStyles.primary} !px-4 !py-2.5 !text-sm`}>
+        <QuoteLink className={`${buttonStyles.primary} whitespace-nowrap !px-4 !py-2.5 !text-sm`}>
           <span className="hidden sm:inline">Solicitar Orçamento</span>
           <span className="sm:hidden">Pedir orçamento</span>
         </QuoteLink>

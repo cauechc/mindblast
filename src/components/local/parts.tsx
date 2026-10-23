@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Check, ChevronRight, CircleCheck } from "lucide-react";
 import type { ReactNode } from "react";
-import { promise, site } from "@/config/site";
+import { site } from "@/config/site";
 import { Container, LinkButton } from "../ui";
 
 export type Crumb = { name: string; href: string };
@@ -47,10 +47,10 @@ export function PageHero({ crumbs, title, subtitle, children }: { crumbs: Crumb[
         <p className="mt-5 max-w-2xl text-lg leading-relaxed text-navy-100">{subtitle}</p>
         <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
           <LinkButton href="#orcamento" className="text-lg">
-            {promise} <ArrowRight className="h-5 w-5" aria-hidden />
+            Comparar orçamentos <ArrowRight className="h-5 w-5" aria-hidden />
           </LinkButton>
           <p className="flex items-center gap-2 text-sm font-semibold text-navy-100">
-            <CircleCheck className="h-5 w-5 text-leaf-400" aria-hidden /> Sem compromisso. Leva menos de 1 minuto.
+            <CircleCheck className="h-5 w-5 text-leaf-400" aria-hidden /> Sem ligar para dez empresas. Você não paga nada para pedir.
           </p>
         </div>
         {children}

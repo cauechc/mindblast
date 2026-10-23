@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
 
 const base =
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl px-6 py-3.5 text-base font-bold transition duration-200 disabled:cursor-not-allowed disabled:opacity-60 active:scale-[0.98]";
+  "inline-flex items-center justify-center gap-2 text-center sm:whitespace-nowrap rounded-xl px-6 py-3.5 text-base font-bold transition duration-200 disabled:cursor-not-allowed disabled:opacity-60 active:scale-[0.98]";
 
 export const buttonStyles = {
   primary: `${base} bg-leaf text-white shadow-cta hover:bg-leaf-600`,

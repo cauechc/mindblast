@@ -12,7 +12,7 @@ Business, Cloud ou "Unlimited" com app Node.js importado do GitHub, ou VPS.
    - Comando de build: `npm run build`
    - Comando de início: `npm start`
 3. **Variáveis de ambiente**: copie os nomes de `.env.example` e preencha os valores.
-   `NEXT_PUBLIC_SITE_URL` deve ser o domínio final, ex.: `https://casanovainterior.com.br`.
+   `NEXT_PUBLIC_SITE_URL` deve ser o domínio final, ex.: `https://mindblast.com.br` (padrão em produção se ficar vazio).
 4. Publique e aponte o domínio.
 
 ## Banco de dados (obrigatório antes de anunciar)

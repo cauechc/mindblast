@@ -13,6 +13,7 @@ export default function OpengraphImage() {
         <div style={{ marginTop: 24, fontSize: 68, fontWeight: 800, lineHeight: 1.1 }}>Receba orçamentos gratuitos para sua casa em poucos minutos</div>
         <div style={{ marginTop: 32, fontSize: 30, color: "#E6ECF7" }}>Energia Solar · Móveis Planejados · Ar-Condicionado</div>
         <div style={{ marginTop: 12, fontSize: 28, color: "#E6ECF7" }}>Salto · Itu · Indaiatuba · Cabreúva</div>
+        <div style={{ marginTop: 40, fontSize: 24, color: "#9FB0CF" }}>Um projeto da MindBlast</div>
       </div>
     ),
     size,

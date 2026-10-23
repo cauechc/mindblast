@@ -15,6 +15,8 @@ export const metadata: Metadata = {
     "casa nova",
     "reforma",
   ],
+  publisher: site.parent.name,
+  creator: site.parent.name,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",

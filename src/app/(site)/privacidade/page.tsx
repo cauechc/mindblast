@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/privacidade" },
 };
 
-/* Modelo inicial. Revise com um profissional e preencha o CNPJ em src/config/site.ts antes de anunciar. */
+/* Modelo inicial. O CNPJ, quando houver, entra sozinho a partir de src/config/site.ts. */
 const sections: { id?: string; h: string; p: string[] }[] = [
   {
     h: "1. Quem somos",

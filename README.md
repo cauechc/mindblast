@@ -13,7 +13,7 @@ npm run dev                  # http://localhost:3000
 
 | O quê | Arquivo |
 | --- | --- |
-| Nome, WhatsApp, e-mail, CNPJ, cidades e serviços | `src/config/site.ts` |
+| Nome, WhatsApp, e-mail, CNPJ (opcional), cidades e serviços | `src/config/site.ts` |
 | Seções da página inicial | `src/components/home/` |
 | Formulário de orçamento | `src/components/home/LeadForm.tsx` |
 | Política de Privacidade (LGPD) | `src/app/(site)/privacidade/page.tsx` |

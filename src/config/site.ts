@@ -16,8 +16,9 @@ export const site = {
   /** Cidade-base usada no schema LocalBusiness. */
   city: "Salto",
   state: "SP",
-  /** Responsável pelo tratamento dos dados (LGPD). Troque pelo CNPJ quando houver. */
+  /** Responsável pelo tratamento dos dados (LGPD). */
   controller: "Casa Nova Interior",
+  /** CNPJ (opcional). Quando houver, aparece no rodapé e na Política de Privacidade. */
   taxId: "",
 } as const;
 

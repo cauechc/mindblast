@@ -25,5 +25,6 @@ A tabela `casanova_leads` é criada sozinha no primeiro acesso. Sem `DATABASE_UR
 
 - Acesse `/admin` com a senha de `ADMIN_PASSWORD` para ver os leads, mudar o status e exportar CSV.
 - Envie o site ao Google Search Console (o sitemap fica em `/sitemap.xml`) e crie o Perfil da Empresa no Google.
+- Google Analytics: crie uma propriedade GA4, copie o ID (G-...) para `NEXT_PUBLIC_GA_ID` e reimplante. O evento `generate_lead` marca cada pedido enviado.
 - Para mandar leads a um CRM, preencha `LEAD_WEBHOOK_URL` (ver `src/lib/crm.ts`).
 - Links de anúncio podem levar `?utm_source=...&utm_campaign=...`; a origem aparece no painel.

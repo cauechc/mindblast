@@ -16,6 +16,8 @@ npm run dev                  # http://localhost:3000
 | Nome, WhatsApp, e-mail, CNPJ (opcional), cidades e serviços | `src/config/site.ts` |
 | Seções da página inicial | `src/components/home/` |
 | Formulário de orçamento | `src/components/home/LeadForm.tsx` |
+| Páginas locais de SEO (textos e faixas de preço) | `src/config/content.ts` |
+| Termos de Uso | `src/app/(site)/termos/page.tsx` |
 | Política de Privacidade (LGPD) | `src/app/(site)/privacidade/page.tsx` |
 | Banco de leads (Postgres via `DATABASE_URL`) | `src/lib/store.ts` |
 | Envio ao CRM (webhook) | `src/lib/crm.ts` |

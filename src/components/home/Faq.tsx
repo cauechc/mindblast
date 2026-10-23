@@ -8,13 +8,13 @@ export const faq = [
   { q: "Meus dados ficam seguros?", a: "Sim. Usamos seus dados só para responder ao seu pedido, conforme a LGPD. Você pode pedir a exclusão a qualquer momento." },
 ];
 
-export function Faq() {
+export function Faq({ items = faq, title = "Perguntas frequentes" }: { items?: { q: string; a: string }[]; title?: string }) {
   return (
     <section id="duvidas" className="bg-navy-50 py-20 sm:py-24">
       <Container className="max-w-3xl">
-        <SectionHeading eyebrow="Dúvidas" title="Perguntas frequentes" />
+        <SectionHeading eyebrow="Dúvidas" title={title} />
         <div className="mt-10 space-y-3">
-          {faq.map((f) => (
+          {items.map((f) => (
             <details key={f.q} className="group rounded-2xl bg-white p-5 shadow-card">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-navy-900">
                 {f.q}

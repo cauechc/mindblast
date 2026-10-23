@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CircleCheck, Lock } from "lucide-react";
-import { cities, services, type ServiceId } from "@/config/site";
+import { cities, propertyTypes, services, type City, type ServiceId } from "@/config/site";
+import { trackEvent } from "@/lib/analytics";
 import { serviceIcons, WhatsAppIcon } from "../icons";
 import { buttonStyles } from "../ui";
 
@@ -24,9 +25,10 @@ const isService = (v: string | null): v is ServiceId => services.some((s) => s.i
 const input =
   "mt-1.5 w-full rounded-xl border-2 border-navy-100 bg-white px-4 py-3 text-base text-ink outline-none transition placeholder:text-muted/60 focus:border-leaf";
 
-export function LeadForm() {
+/** Em páginas locais, o serviço e a cidade já vêm preenchidos. */
+export function LeadForm({ defaultService, defaultCity }: { defaultService?: ServiceId; defaultCity?: City }) {
   const params = useSearchParams();
-  const [service, setService] = useState<ServiceId | "">("");
+  const [service, setService] = useState<ServiceId | "">(defaultService ?? "");
   const [phone, setPhone] = useState("");
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<"idle" | "sending" | "error">("idle");
@@ -51,6 +53,7 @@ export function LeadForm() {
           name: f.get("name"),
           whatsapp: f.get("whatsapp"),
           city: f.get("city"),
+          propertyType: f.get("propertyType"),
           service: f.get("service"),
           description: f.get("description"),
           consent: f.get("consent") === "on",
@@ -60,6 +63,7 @@ export function LeadForm() {
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok) {
+        trackEvent("generate_lead", { service: f.get("service"), city: f.get("city") });
         setDone(data);
         setStatus("idle");
         return;
@@ -77,7 +81,7 @@ export function LeadForm() {
         <CircleCheck className="mx-auto h-14 w-14 text-leaf" aria-hidden />
         <h3 className="mt-4 text-2xl font-extrabold text-navy-900">Pedido recebido!</h3>
         <p className="mt-2 text-muted">
-          Número do pedido <strong className="font-mono text-navy-900">{done.id}</strong>. Em breve um especialista entra em contato pelo seu WhatsApp.
+          Número do pedido <strong className="font-mono text-navy-900">{done.id}</strong>. Vamos buscar até 3 orçamentos para você, e os especialistas entram em contato pelo seu WhatsApp.
         </p>
         <a href={done.whatsappUrl} target="_blank" rel="noopener noreferrer" className={`${buttonStyles.primary} mt-6 w-full !bg-wa hover:!bg-[#1ebe5a]`}>
           <WhatsAppIcon className="h-5 w-5" />
@@ -91,6 +95,7 @@ export function LeadForm() {
 
   return (
     <form onSubmit={submit} noValidate className="rounded-3xl bg-white p-6 shadow-2xl sm:p-8">
+      <p className="mb-5 rounded-xl bg-leaf-50 px-4 py-2.5 text-center text-sm font-bold text-leaf-600">Receba até 3 orçamentos gratuitos</p>
       <fieldset>
         <legend className="text-sm font-bold text-navy-900">Serviço desejado</legend>
         <div className="mt-2 grid grid-cols-3 gap-2">
@@ -137,7 +142,7 @@ export function LeadForm() {
         </label>
         <label className="block text-sm font-bold text-navy-900">
           Cidade
-          <select name="city" required defaultValue="" className={input}>
+          <select name="city" required defaultValue={defaultCity ?? ""} className={input}>
             <option value="" disabled>
               Selecione
             </option>
@@ -148,6 +153,20 @@ export function LeadForm() {
             ))}
           </select>
           {err("city")}
+        </label>
+        <label className="block text-sm font-bold text-navy-900 sm:col-span-2">
+          Tipo de imóvel
+          <select name="propertyType" required defaultValue="" className={input}>
+            <option value="" disabled>
+              Selecione
+            </option>
+            {propertyTypes.map((t) => (
+              <option key={t} value={t}>
+                {t}
+              </option>
+            ))}
+          </select>
+          {err("propertyType")}
         </label>
         <label className="block text-sm font-bold text-navy-900 sm:col-span-2">
           Descrição da necessidade

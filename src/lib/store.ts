@@ -2,7 +2,7 @@ import { randomBytes } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import postgres, { type Sql } from "postgres";
-import type { City, ServiceId } from "@/config/site";
+import type { City, PropertyType, ServiceId } from "@/config/site";
 
 /**
  * Armazenamento dos leads (pedidos de orçamento).
@@ -19,6 +19,8 @@ export type Lead = {
   whatsapp: string;
   city: City;
   service: ServiceId;
+  /** Opcional porque os primeiros leads foram salvos antes deste campo existir. */
+  propertyType?: PropertyType;
   description: string;
   /** Momento em que a pessoa aceitou a Política de Privacidade (LGPD). */
   consentAt: string;

@@ -4,7 +4,7 @@ import { cities, services, site, whatsappUrl } from "@/config/site";
 import { serviceIcons, WhatsAppIcon } from "../icons";
 import { Container, LinkButton } from "../ui";
 
-const perks = ["100% gratuito", "Sem compromisso", "Profissionais da região"];
+const perks = ["Até 3 orçamentos grátis", "Sem compromisso", "Profissionais da região"];
 
 export function Hero() {
   return (

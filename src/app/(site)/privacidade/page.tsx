@@ -13,7 +13,7 @@ const sections: { id?: string; h: string; p: string[] }[] = [
   {
     h: "1. Quem somos",
     p: [
-      `A ${site.name} é um projeto da ${site.controller}${site.taxId ? ` (CNPJ ${site.taxId})` : ""}, que, com atuação em Salto, Itu, Indaiatuba e Cabreúva/SP, é a controladora dos dados pessoais tratados neste site. Contato do encarregado (DPO): ${site.email}.`,
+      `A ${site.name} é um projeto da ${site.controller}${site.taxId ? ` (CNPJ ${site.taxId})` : ""}, que, com atuação em Salto, Itu e Indaiatuba/SP, é a controladora dos dados pessoais tratados neste site. Contato do encarregado (DPO): ${site.email}.`,
     ],
   },
   {

@@ -13,7 +13,7 @@ const sections: { h: string; p: string[] }[] = [
   {
     h: "1. O que é a Casa Nova Interior",
     p: [
-      `A ${site.name} é uma plataforma gratuita, mantida pela ${site.parent.name}, que conecta moradores de Salto, Itu, Indaiatuba e Cabreúva/SP a profissionais e empresas de serviços residenciais. Ao enviar um pedido, você recebe orçamentos para comparar.`,
+      `A ${site.name} é uma plataforma gratuita, mantida pela ${site.parent.name}, que conecta moradores de Salto e Itu/SP a profissionais e empresas de serviços residenciais. Ao enviar um pedido, você recebe orçamentos para comparar.`,
     ],
   },
   {

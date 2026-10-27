@@ -3,7 +3,7 @@ import { Container, SectionHeading } from "../ui";
 
 export const faq = [
   { q: "Quanto custa pedir um orçamento?", a: "Nada. Você não paga nada para pedir e não tem compromisso: só fecha se gostar da proposta." },
-  { q: "Quais cidades vocês atendem?", a: "Salto, Itu, Indaiatuba e Cabreúva, no interior de São Paulo." },
+  { q: "Quais cidades vocês atendem?", a: "Por enquanto, Salto e Itu, no interior de São Paulo." },
   { q: "Em quanto tempo recebo contato?", a: "Normalmente no mesmo dia útil, pelo WhatsApp que você informar." },
   { q: "Meus dados ficam seguros?", a: "Sim. Usamos seus dados só para responder ao seu pedido, conforme a LGPD. Você pode pedir a exclusão a qualquer momento." },
 ];

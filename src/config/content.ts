@@ -192,14 +192,4 @@ export const cityContent: Record<City, CityContent> = {
       "Itu combina casas históricas no centro com grandes condomínios residenciais. Reformas e obras novas convivem lado a lado, e cada uma pede um tipo diferente de projeto.",
     neighborhoods: "Atendemos o centro, os bairros residenciais e os condomínios de Itu.",
   },
-  Indaiatuba: {
-    intro:
-      "Indaiatuba é uma das cidades que mais crescem na região, com muitos apartamentos e condomínios entregues nos últimos anos. É o momento de equipar o imóvel novo.",
-    neighborhoods: "Atendemos todas as regiões de Indaiatuba, incluindo os condomínios e os empreendimentos recém-entregues.",
-  },
-  Cabreúva: {
-    intro:
-      "Cabreúva, aos pés da Serra do Japi, reúne chácaras, condomínios e casas de campo. Imóveis maiores e afastados se beneficiam muito de energia solar e de projetos bem planejados.",
-    neighborhoods: "Atendemos o centro, Jacaré, os condomínios e as chácaras de Cabreúva.",
-  },
 };

@@ -1,7 +1,7 @@
 # Casa Nova Interior
 
 Plataforma regional de orçamentos residenciais (Energia Solar, Móveis Planejados, Ar-Condicionado)
-para Salto, Itu, Indaiatuba e Cabreúva/SP. Next.js (App Router) + TypeScript + Tailwind.
+para Salto e Itu/SP. Next.js (App Router) + TypeScript + Tailwind.
 
 ```bash
 npm install

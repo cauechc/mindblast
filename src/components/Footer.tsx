@@ -105,7 +105,7 @@ export function Footer() {
         <Container className="pb-8 text-xs text-navy-100/50">
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <p>
-              © {new Date().getFullYear()} {site.name}, um projeto da {site.parent.name}{site.taxId ? ` · CNPJ ${site.taxId}` : ""}. Salto, Itu, Indaiatuba e Cabreúva/SP.
+              © {new Date().getFullYear()} {site.name}, um projeto da {site.parent.name}{site.taxId ? ` · CNPJ ${site.taxId}` : ""}. Salto e Itu/SP.
             </p>
             <p className="text-navy-100/70">
               Powered by <span className="font-bold text-white">{site.parent.name}</span>

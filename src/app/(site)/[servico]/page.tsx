@@ -17,8 +17,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = serviceById((await params).servico);
   if (!service) return {};
   return {
-    title: `${service.name} em Salto, Itu, Indaiatuba e Cabreúva: compare orçamentos`,
-    description: `Compare orçamentos de ${serviceContent[service.id].noun} em Salto, Itu, Indaiatuba e Cabreúva/SP. ${service.short}`,
+    title: `${service.name} em Salto, Itu e Indaiatuba: compare orçamentos`,
+    description: `Compare orçamentos de ${serviceContent[service.id].noun} em Salto, Itu e Indaiatuba/SP. ${service.short}`,
     alternates: { canonical: servicePath(service.id) },
   };
 }
@@ -34,7 +34,7 @@ export default async function ServicePage({ params }: Props) {
       <FaqJsonLd items={c.faq} />
       <PageHero
         crumbs={[{ name: service.name, href: servicePath(service.id) }]}
-        title={`${service.name} em Salto, Itu, Indaiatuba e Cabreúva`}
+        title={`${service.name} em Salto, Itu e Indaiatuba`}
         subtitle={`${service.short} Compare orçamentos de profissionais da sua cidade sem ligar para dez empresas.`}
       />
       <Container className="max-w-4xl space-y-14 py-16 sm:py-20">

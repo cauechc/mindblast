@@ -5,7 +5,7 @@ export const site = {
   name: "Casa Nova Interior",
   tagline: "Compare orçamentos para sua casa",
   description:
-    "Compare orçamentos de energia solar, móveis planejados e ar-condicionado em Salto, Itu, Indaiatuba e Cabreúva/SP.",
+    "Compare orçamentos de energia solar, móveis planejados e ar-condicionado em Salto, Itu e Indaiatuba/SP.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.NODE_ENV === "production" ? "https://mindblast.com.br" : "http://localhost:3000"),
   /** Empresa por trás do projeto. */
   parent: { name: "MindBlast", url: "https://mindblast.com.br" },
@@ -24,10 +24,10 @@ export const site = {
   taxId: "",
 } as const;
 
-export const cities = ["Salto", "Itu", "Indaiatuba", "Cabreúva"] as const;
+export const cities = ["Salto", "Itu", "Indaiatuba"] as const;
 export type City = (typeof cities)[number];
 
-/** Slug de URL de cada cidade: /energia-solar/cabreuva. */
+/** Slug de URL de cada cidade: /energia-solar/indaiatuba. */
 export const citySlug = (c: City) => c.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 export const cityBySlug = (slug: string) => cities.find((c) => citySlug(c) === slug);
 

@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+body { background: #070B1F; color: #E8F4FF; font-family: "Space Grotesk", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+::selection { background: #2F8CFF; color: white; }
+:focus-visible { outline: 2px solid #5AA4FF; outline-offset: 3px; border-radius: 6px; }
+
+/* Revela ao rolar (ver components/Reveal.tsx). */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.reveal.is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+}
+
+/* Grade sutil de fundo. */
+.bg-grid {
+  background-image: linear-gradient(rgb(175 198 255 / 0.05) 1px, transparent 1px), linear-gradient(90deg, rgb(175 198 255 / 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+/* Maquetes de site: o texto escala com a largura do aparelho. */
+.cq { container-type: inline-size; }

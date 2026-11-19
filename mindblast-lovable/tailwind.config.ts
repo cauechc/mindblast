@@ -12,8 +12,8 @@ export default {
         wa: { DEFAULT: "#25D366", 600: "#1DA851" },
       },
       fontFamily: {
-        display: ['"Archivo Black"', '"Arial Black"', "system-ui", "sans-serif"],
-        sans: ['"Space Grotesk"', "system-ui", "sans-serif"],
+        display: ['"Plus Jakarta Sans"', "system-ui", "sans-serif"],
+        sans: ['"Plus Jakarta Sans"', "system-ui", "sans-serif"],
       },
       boxShadow: {
         glow: "0 0 0 1px rgb(47 140 255 / 0.25), 0 10px 40px -10px rgb(47 140 255 / 0.45)",

@@ -126,12 +126,12 @@ export function ChatMock({ className = "" }: { className?: string }) {
         {msgs.map((m, i) => (
           <div
             key={i}
-            className={`max-w-[80%] rounded-xl px-2.5 py-1.5 text-[11px] leading-snug ${m.from === "client" ? "self-end rounded-br-sm bg-[#1f6f4a] text-white" : "self-start rounded-bl-sm bg-navy-700 text-ice"}`}
+            className={`max-w-[80%] rounded-xl px-2.5 py-1.5 text-[11px] leading-snug ${m.from === "client" ? "self-start rounded-bl-sm bg-navy-700 text-ice" : "self-end rounded-br-sm bg-blast text-white"}`}
           >
             {m.text}
             <span className="ml-1.5 inline-flex items-center gap-0.5 align-bottom text-[9px] text-white/50">
               {m.time}
-              {m.from === "client" && <CheckCheck className="h-3 w-3 text-blast-400" />}
+              {m.from === "bot" && <CheckCheck className="h-3 w-3 text-white/70" />}
             </span>
           </div>
         ))}

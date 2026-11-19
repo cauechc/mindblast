@@ -34,24 +34,33 @@ export function Arc({ className = "" }: P) {
   );
 }
 
-/** MIND (branco) + BLAST (azul) com cursor clicando e faíscas. */
+/** Ícone oficial: cursor clicando com 3 faíscas azuis. `boxed` põe o fundo quadrado escuro (favicon, foto de perfil). */
+export function BrandIcon({ className = "h-8 w-8", boxed = false }: { className?: string; boxed?: boolean }) {
+  return (
+    <svg viewBox="0 0 300 300" aria-hidden className={className}>
+      {boxed && <rect width="300" height="300" rx="70" fill="#070B1F" />}
+      <g stroke="#2F8CFF" strokeWidth="18" strokeLinecap="round">
+        <path d="M49 106 L84 116" className="animate-spark" />
+        <path d="M93 56 L109 89" className="animate-spark [animation-delay:300ms]" />
+        <path d="M151 46 L144 80" className="animate-spark [animation-delay:600ms]" />
+      </g>
+      <path d="M110 107 L110 238 L144 210 L170 260 L198 246 L176 198 L218 195 Z" fill="#E8F4FF" stroke="#E8F4FF" strokeWidth="6" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/** Logo oficial: ícone + MIND (branco) BLAST (azul) + SOLUÇÕES DIGITAIS. */
 export function Logo({ className = "", subtitle = true }: { className?: string; subtitle?: boolean }) {
   return (
-    <span className={`inline-flex flex-col leading-none ${className}`}>
-      <span className="relative inline-flex items-baseline font-display text-[1.35em] tracking-tight">
-        <span className="text-white">MIND</span>
-        <span className="text-blast">BLAST</span>
-        <svg viewBox="0 0 32 32" aria-hidden className="absolute -bottom-[0.35em] -right-[0.85em] h-[0.95em] w-[0.95em]">
-          <g stroke="#2F8CFF" strokeWidth="2" strokeLinecap="round" fill="none" className="animate-spark">
-            <path d="M8 6 L6 2" />
-            <path d="M4 10 L1 9" />
-            <path d="M13 5 L14 1" />
-            <path d="M3 4 l2 1 -1 1 2 1" />
-          </g>
-          <path d="M8 8 L8 28 L13 23 L17 31 L20.5 29.5 L16.5 21.5 L23 21.5 Z" fill="#E8F4FF" stroke="#070B1F" strokeWidth="1.5" strokeLinejoin="round" />
-        </svg>
+    <span className={`inline-flex items-center gap-[0.45em] leading-none ${className}`}>
+      <BrandIcon className="h-[2.1em] w-[2.1em] shrink-0" />
+      <span className="inline-flex flex-col">
+        <span className="font-display text-[1.35em] tracking-[-0.04em]">
+          <span className="text-white">MIND</span>
+          <span className="text-blast">BLAST</span>
+        </span>
+        {subtitle && <span className="mt-[0.35em] text-[0.42em] font-semibold tracking-[0.42em] text-soft">SOLUÇÕES DIGITAIS</span>}
       </span>
-      {subtitle && <span className="mt-1 text-[0.42em] font-semibold tracking-[0.42em] text-soft">SOLUÇÕES DIGITAIS</span>}
     </span>
   );
 }

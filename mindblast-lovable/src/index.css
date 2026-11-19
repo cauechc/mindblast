@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
-body { background: #070B1F; color: #E8F4FF; font-family: "Space Grotesk", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+body { background: #070B1F; color: #E8F4FF; font-family: "Plus Jakarta Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
 ::selection { background: #2F8CFF; color: white; }
 :focus-visible { outline: 2px solid #5AA4FF; outline-offset: 3px; border-radius: 6px; }
 
@@ -26,3 +26,6 @@ body { background: #070B1F; color: #E8F4FF; font-family: "Space Grotesk", system
 
 /* Maquetes de site: o texto escala com a largura do aparelho. */
 .cq { container-type: inline-size; }
+
+/* Padrão Mind Blast: títulos em Plus Jakarta Sans ExtraBold, bem justos. */
+.font-display { font-weight: 800; letter-spacing: -0.035em; }

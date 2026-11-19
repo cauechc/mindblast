@@ -19,7 +19,7 @@ export function Hero() {
             Sites • Apps • Sistemas • Automação com IA · Salto/SP
           </p>
           <h1 className="mt-6 font-display text-[2.6rem] leading-[0.98] tracking-tight text-white sm:text-6xl xl:text-7xl">
-            Seu negócio merece ser encontrado.
+            Seu negócio merece ser <span className="text-blast">encontrado.</span>
           </h1>
           <Arc className="mt-5 h-5 w-40" />
           <p className="mt-5 max-w-xl text-lg text-soft sm:text-xl">

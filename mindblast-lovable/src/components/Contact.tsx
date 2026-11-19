@@ -117,7 +117,7 @@ export function QuoteForm() {
           <input className={inputCls} placeholder="Ex.: pet shop, clínica, oficina" value={form.business} onChange={set("business")} />
         </Field>
         <Field label="Cidade" error={errors.city}>
-          <input className={inputCls} placeholder="Ex.: Salto/SP" value={form.city} onChange={set("city")} />
+          <input className={inputCls} placeholder="Ex.: Salto" value={form.city} onChange={set("city")} />
         </Field>
       </div>
 

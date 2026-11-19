@@ -24,7 +24,7 @@ function Footer() {
               <Mail className="h-4 w-4" /> {site.email}
             </a>
             <span className="inline-flex items-center gap-2">
-              <MapPin className="h-4 w-4" /> {site.city}/{site.state}
+              <MapPin className="h-4 w-4" /> Salto e região
             </span>
           </div>
         </div>

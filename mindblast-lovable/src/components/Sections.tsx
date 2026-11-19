@@ -16,7 +16,7 @@ export function Hero() {
         <div className="animate-fade-up">
           <p className="inline-flex items-center gap-2 rounded-full border border-blast/30 bg-blast/10 px-3 py-1 text-xs font-medium text-soft">
             <span className="h-1.5 w-1.5 animate-spark rounded-full bg-blast" />
-            Sites • Apps • Sistemas • Automação com IA · Salto/SP
+            Sites • Apps • Sistemas • Automação com IA · Salto e região
           </p>
           <h1 className="mt-6 font-display text-[2.6rem] leading-[0.98] tracking-tight text-white sm:text-6xl xl:text-7xl">
             Seu negócio merece ser <span className="text-blast">encontrado.</span>

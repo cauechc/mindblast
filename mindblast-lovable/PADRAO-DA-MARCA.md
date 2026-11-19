@@ -1,6 +1,6 @@
 # PADRÃO DA MARCA MIND BLAST SOLUÇÕES DIGITAIS (seguir em toda alteração)
 
-Empresa: Mind Blast Soluções Digitais, Salto/SP e região. Faz sites, landing pages, aplicativos, sistemas sob medida e automação com IA para pequenos negócios. Todo texto em português do Brasil, tom direto, simples e confiante, frases curtas, sem jargão técnico.
+Empresa: Mind Blast Soluções Digitais, Salto e região. Faz sites, landing pages, aplicativos, sistemas sob medida e automação com IA para pequenos negócios. Todo texto em português do Brasil, tom direto, simples e confiante, frases curtas, sem jargão técnico.
 
 Cores (não inventar outras):
 - Fundo #070B1F; seções alternadas #0B1230; cards #0E1638 com borda branca 8%.

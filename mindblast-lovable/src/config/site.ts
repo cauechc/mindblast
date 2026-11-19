@@ -118,14 +118,14 @@ export type Project = { slug: string; type: string; headline: string; city: stri
 
 /** Projetos ilustrativos (não são clientes reais). Troque por projetos reais quando tiver autorização. */
 export const projects: Project[] = [
-  { slug: "lava-jato", type: "Lava-jato e estética automotiva", headline: "Seu carro brilhando de novo", city: "Salto/SP", accent: "#2F8CFF", image: "/fotos/lava-jato.jpg" },
-  { slug: "corretor-de-imoveis", type: "Corretor de imóveis de alto padrão", headline: "Imóveis exclusivos em Itu", city: "Itu/SP", accent: "#C9A86A", image: "/fotos/corretor-de-imoveis.jpg" },
-  { slug: "pet-shop", type: "Pet shop e clínica veterinária", headline: "Cuidado completo para o seu pet", city: "Indaiatuba/SP", accent: "#3CC6A8", image: "/fotos/pet-shop.jpg" },
-  { slug: "pilates", type: "Estúdio de Pilates", headline: "Movimento, postura e bem-estar", city: "Sorocaba/SP", accent: "#E58FB0", image: "/fotos/pilates.jpg" },
-  { slug: "marmitaria", type: "Marmitaria / comida caseira", headline: "Comida caseira todo dia", city: "Campinas/SP", accent: "#F2A33A", image: "/fotos/marmitaria.jpg" },
-  { slug: "serralheria", type: "Serralheria e caldeiraria", headline: "Portões, estruturas e projetos em aço", city: "Jundiaí/SP", accent: "#8FA3BF", image: "/fotos/serralheria.jpg" },
-  { slug: "oficina-de-motos", type: "Oficina e peças de moto", headline: "Sua moto em boas mãos", city: "Salto/SP", accent: "#FF5A3C", image: "/fotos/oficina-de-motos.jpg" },
-  { slug: "eletrica", type: "Empresa de elétrica", headline: "Instalações elétricas com segurança", city: "Itu/SP", accent: "#F5D020", image: "/fotos/eletrica.jpg" },
+  { slug: "lava-jato", type: "Lava-jato e estética automotiva", headline: "Seu carro brilhando de novo", city: "Salto e região", accent: "#2F8CFF", image: "/fotos/lava-jato.jpg" },
+  { slug: "corretor-de-imoveis", type: "Corretor de imóveis de alto padrão", headline: "Imóveis exclusivos na região", city: "Salto e região", accent: "#C9A86A", image: "/fotos/corretor-de-imoveis.jpg" },
+  { slug: "pet-shop", type: "Pet shop e clínica veterinária", headline: "Cuidado completo para o seu pet", city: "Salto e região", accent: "#3CC6A8", image: "/fotos/pet-shop.jpg" },
+  { slug: "pilates", type: "Estúdio de Pilates", headline: "Movimento, postura e bem-estar", city: "Salto e região", accent: "#E58FB0", image: "/fotos/pilates.jpg" },
+  { slug: "marmitaria", type: "Marmitaria / comida caseira", headline: "Comida caseira todo dia", city: "Salto e região", accent: "#F2A33A", image: "/fotos/marmitaria.jpg" },
+  { slug: "serralheria", type: "Serralheria e caldeiraria", headline: "Portões, estruturas e projetos em aço", city: "Salto e região", accent: "#8FA3BF", image: "/fotos/serralheria.jpg" },
+  { slug: "oficina-de-motos", type: "Oficina e peças de moto", headline: "Sua moto em boas mãos", city: "Salto e região", accent: "#FF5A3C", image: "/fotos/oficina-de-motos.jpg" },
+  { slug: "eletrica", type: "Empresa de elétrica", headline: "Instalações elétricas com segurança", city: "Salto e região", accent: "#F5D020", image: "/fotos/eletrica.jpg" },
 ];
 
 export const formatBRL = (v: number) => `R$ ${v.toLocaleString("pt-BR")}`;

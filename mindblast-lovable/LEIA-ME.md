@@ -8,6 +8,9 @@ O formulário "Peça seu orçamento" monta a mensagem com nome, WhatsApp, empres
 o que a pessoa precisa, prazo e detalhes, e abre `wa.me/5511993626555` com tudo já escrito.
 A pessoa só toca em enviar. Os botões dos serviços, planos e projetos já marcam a opção certa no formulário.
 
+## Padrão visual
+Veja `PADRAO-DA-MARCA.md` (cole esse texto em Settings > Knowledge da Lovable) e a prancha em `public/padrao-da-marca.png`.
+
 ## Onde editar
 - `src/config/site.ts`: número do WhatsApp, e-mail, Instagram, serviços, preços, projetos de exemplo.
 - `public/fotos/`: fotos dos cards e das maquetes.
